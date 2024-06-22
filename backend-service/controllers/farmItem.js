@@ -70,9 +70,20 @@ async function destroyFarmItem(farmItemId) {
     }
 }
 
+async function listCategories() {
+    try {
+        const categories = await models.Category.findAll()
+        return categories;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
 module.exports = {
     createFarmItem,
     listFarmItems,
     editFarmItem,
-    destroyFarmItem
+    destroyFarmItem,
+    listCategories
 }
