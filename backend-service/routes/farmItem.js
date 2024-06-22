@@ -1,6 +1,5 @@
-const { createFarmItem, listFarmItems, editFarmItem, destroyFarmItem } = require('../controllers/farmItem');
+const { createFarmItem, listFarmItems, editFarmItem, destroyFarmItem, listCategories } = require('../controllers/farmItem');
 const Joi = require('joi');
-const { func } = require('joi');
 
 const addFarmItemSchema = Joi.object({
     name: Joi.string().label('Name').required(),
@@ -68,9 +67,22 @@ async function deleteFarmItem(req, res) {
     }
 }
 
+async function getCategories (req, res) {
+    try {
+        const result = await listCategories();
+        res.send(result)
+    } catch (error) {
+        res.status(400);
+        res.send({
+            error: error.message
+        })
+    }
+}
+
 module.exports = {
     addFarmItem,
     getFarmItems,
     updateFarmItem,
-    deleteFarmItem
+    deleteFarmItem,
+    getCategories
 }
