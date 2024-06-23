@@ -1,26 +1,87 @@
-import React from "react";
-import "./auth.scss";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import "./signup.scss";
+import { Link, useNavigate } from "react-router-dom";
+import { signUp } from "../../serviceApis/loginapi";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    userName: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+  });
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSignUp = async () => {
+    const { userName, email, password, confirmPassword } = formData;
+    if (!userName || !email || !password || !confirmPassword) {
+      setError("Please fill all the fields.");
+      return;
+    }
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+    try {
+      const userData = await signUp({ userName, email, password, confirmPassword });
+      console.log("user->", userData);
+      // Handle successful signup, e.g., navigate to login or dashboard
+      navigate("/login");
+    } catch (error) {
+      console.error("Error signing up:", error);
+      setError("Error signing up. Please try again.");
+    }
+  };
+
   return (
-    <div>
-      <div class="log-form">
+    <div className="auth-container">
+      <div className="log-form">
         <h2>Create an account</h2>
         <form>
-          <input type="text" title="Name" placeholder="Name" />
-          <input type="email" title="Email" placeholder="Email" />
-
-          <input type="password" title="password" placeholder="Password" />
           <input
             type="text"
-            title="confirmPassword"
-            placeholder="Confirm Password"
+            name="userName"
+            title="UserName"
+            placeholder="UserName"
+            value={formData.userName}
+            onChange={handleChange}
           />
-          <button type="submit" class="btn">
+          <input
+            type="email"
+            name="email"
+            title="Email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            name="password"
+            title="Password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            name="confirmPassword"
+            title="Confirm Password"
+            placeholder="Confirm Password"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+          />
+          {error && <p className="text-danger">{error}</p>}
+          <button type="button" className="btn" onClick={handleSignUp}>
             Sign Up
           </button>
-
           <Link to="/login" className="forgot">
             Already have an account?
           </Link>
