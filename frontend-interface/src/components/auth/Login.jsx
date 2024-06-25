@@ -3,6 +3,7 @@ import { postLogin } from "../../serviceApis/loginapi";
 import "./login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider";
+import logo from "../../assets/FarmNotes.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -32,7 +33,8 @@ const Login = () => {
   return (
     <div className="auth-container">
       <div className="log-form">
-        <h2>Login to your account</h2>
+        <img src={logo} alt="Logo" className="logo" /> {/* Logo image */}
+        <h4>Login to your account</h4>
         <form>
           <input
             type="text"

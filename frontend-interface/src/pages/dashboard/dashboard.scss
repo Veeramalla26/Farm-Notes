@@ -5,15 +5,15 @@ body {
     padding: 0;
     height: 100vh;
     overflow: hidden;
-  }
-  
-  .dashboard {
+}
+
+.dashboard {
     display: flex;
     flex-direction: column;
     height: 100%;
-  }
-  
-  .top-bar {
+}
+
+.top-bar {
     width: 100%;
     background-color: #d4d4bc;
     padding: 1em;
@@ -24,35 +24,37 @@ body {
     top: 0;
     z-index: 1000;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .logo {
+}
+
+.logo {
     height: 40px;
-  }
-  
-  .content {
+}
+
+.content {
     display: flex;
     flex-grow: 1;
-    overflow: hidden;
-  }
-  
-  .navbar {
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow: auto;
+    background-color: #fff;
+}
+
+.navbar {
     background-color: #d4d4bc;
-    padding: 1em;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
-  }
-  
-  .navbar ul {
+}
+
+.navbar ul {
     list-style-type: none;
     padding: 0;
-  }
-  
-  .navbar ul li {
+}
+
+.navbar ul li {
     margin: 1em 0;
-  }
-  
-  .navbar ul li a {
+}
+
+.navbar ul li a {
     text-decoration: none;
     color: #1f7f19;
     font-size: 1.2em;
@@ -60,42 +62,72 @@ body {
     padding: 0.5em;
     border-radius: 5px;
     transition: background-color 0.3s;
-  }
-  
-  .navbar ul li a:hover {
+}
+
+.navbar ul li a:hover {
     background-color: #9fba8f;
-  }
-  
-  .main-content {
+}
+
+.main-content {
     flex-grow: 1;
     padding: 2em;
-    background-color: #fff; /* Light background color for content area */
+    background-color: #fff;
     overflow-y: auto;
-    height: 100vh;
-  }
-  
-  .button {
+}
+
+.add-item-button {
     background-color: #1f7f19;
     color: white;
     padding: 0.5em 1em;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  .button:hover {
+    margin-right: 10px;
+    /* Added margin-right for space between buttons */
+}
+
+.add-item-button:hover {
     background-color: #145214;
-  }
-  
-  .text-dark {
+}
+
+.text-dark {
     color: #1f7f19;
-  }
-  
-  .text-light {
+}
+
+.text-light {
     color: #9fba8f;
-  }
-  
-  .text-error {
+}
+
+.text-error {
     color: #ff3333;
-  }
-  
+}
+
+.modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: normal;
+}
+
+.green-link {
+    color: #1f7f19;
+    /* Green text color */
+    text-decoration: underline;
+    /* Remove default underline */
+    position: relative;
+    /* Required for the pseudo-element */
+    transition: color 0.3s;
+    /* Smooth transition for color change */
+    margin-right: 20px;
+}
+
+.green-link:focus,
+.green-link:hover {
+    color: #1f7f19;
+    /* Change text color on focus/hover */
+}
+
+.green-link:focus::after,
+.green-link:hover::after {
+    background-color: #1f7f19;
+    /* Change underline color on focus/hover */
+}

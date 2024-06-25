@@ -1,0 +1,56 @@
+.farm-activities {
+    padding: 20px;
+}
+
+.banner {
+    background-color: #c7e8c3;
+    /* Light green */
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-detail {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.item-detail label {
+    font-weight: bold;
+    margin-right: 10px;
+    color: #1f7f19;
+    /* Dark green */
+}
+
+.item-detail span {
+    color: #156c14;
+    /* Slightly darker green */
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+}
+
+.button-add-activity {
+    background-color: #1f7f19;
+    /* Dark green */
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button-add-activity:hover {
+    background-color: #156c14;
+    /* Slightly darker green */
+}

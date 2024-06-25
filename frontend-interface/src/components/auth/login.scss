@@ -32,10 +32,20 @@ body {
         width: 95%;
         padding: 1em;
     }
-    h2 {
+    .logo {
+        width: 100px;
+        /* Adjust width as needed */
+        height: auto;
+        /* Maintain aspect ratio */
+        display: block;
+        /* Ensure it's a block element */
+        margin: 0 auto 1em;
+        /* Center horizontally with bottom margin */
+    }
+    h4 {
         color: #1f7f19;
-        font-family: "Open Sans Condensed";
-        font-size: 1.35em;
+        // font-family: "Open Sans Condensed", sans-serif;
+        font-size: 1.16em;
         text-transform: uppercase;
         margin-bottom: 1.5em;
         text-align: center;
@@ -61,10 +71,13 @@ body {
         border-radius: 5px;
         cursor: pointer;
         &:hover {
-            background: #145214;
+            background: #1f7f19;
+            color: #fff;
         }
         &:focus {
             outline: none;
+            background: #1f7f19;
+            color: #fff;
         }
     }
     .forgot {

@@ -1,0 +1,76 @@
+/* farm-items-display.scss */
+
+.item-list {
+    padding: 20px;
+    .header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        h2 {
+            margin: 0 0 0 10px;
+            /* Adjust margin to position the header next to the back button */
+            display: inline-block;
+        }
+        button {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 10px;
+            svg {
+                margin-right: 5px;
+                /* Space between icon and text */
+            }
+        }
+    }
+    .table-container {
+        max-height: 550px;
+        /* Adjust the height as needed */
+        overflow-y: auto;
+        position: relative;
+    }
+    .table-container::-webkit-scrollbar {
+        width: 4px;
+        /* Small scroll bar width */
+    }
+    .table-container::-webkit-scrollbar-thumb {
+        background-color: lightgrey;
+        /* Light color for the scroll bar */
+        border-radius: 4px;
+    }
+    .table-container thead th {
+        position: sticky;
+        top: 0;
+        background-color: white;
+        z-index: 1;
+    }
+    .actions-column {
+        display: flex;
+        justify-content: space-around;
+        .action-button {
+            // margin: 0 0px;
+            // display: inline-flex;
+            // align-items: center;
+            svg {
+                margin-right: 5px;
+            }
+        }
+    }
+    .loading-spinner,
+    .no-records-found,
+    .error-message {
+        text-align: center;
+        font-size: 1.5em;
+        color: grey;
+    }
+    .error-message {
+        color: red;
+        width: 100%;
+        /* Ensure the error message spans the width of the container */
+    }
+    table {
+        th,
+        td {
+            vertical-align: middle;
+            text-align: center;
+        }
+    }
+}

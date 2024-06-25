@@ -1,0 +1,110 @@
+/* add-item-modal.scss */
+
+.modal-content {
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    padding: 2em;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    align-items: normal;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    margin-bottom: 1em;
+}
+
+.modal-title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.modal-body {
+    padding: 0;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0;
+    margin-top: 1em;
+}
+
+.form-group {
+    margin-bottom: 1.5em;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75em;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    border-color: #1f7f19;
+    box-shadow: 0 0 5px rgba(31, 127, 25, 0.5);
+}
+
+button {
+    margin-right: 10px;
+}
+
+button.close-button {
+    background-color: lightgrey;
+    border-color: lightgrey;
+}
+
+button.add-item-button {
+    background-color: #1f7f19;
+    color: white;
+    border: none;
+}
+
+button.add-item-button:hover {
+    background-color: #145214;
+}
+
+select.form-control {
+    color: #000;
+    /* Black color for placeholder */
+    padding: 0.75em;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+select.form-control:focus {
+    border-color: #1f7f19;
+    box-shadow: 0 0 5px rgba(31, 127, 25, 0.5);
+}
+
+select.form-control option {
+    color: #000;
+    /* Black color for options */
+    background-color: #fff;
+    /* White background */
+    transition: background-color 0.3s;
+}
+
+select.form-control option:checked {
+    color: #fff;
+    /* White color for selected option */
+    background-color: #1f7f19;
+    /* Green background */
+}
+
+.text-danger {
+    color: red;
+    /* Error message color */
+    font-size: 0.875em;
+    /* Adjust font size if needed */
+}
