@@ -21,7 +21,12 @@ module.exports = (sequelize, DataTypes) => {
   FarmItems.init({
     name: DataTypes.STRING,
     categoryId: DataTypes.INTEGER,
-    customerId: DataTypes.INTEGER
+    customerId: DataTypes.INTEGER,
+    itemCode: DataTypes.STRING,
+    species: DataTypes.STRING,
+    dateOfBirth: DataTypes.DATE,
+    healthStatus: DataTypes.STRING,
+    feedingSchedule: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'FarmItems',

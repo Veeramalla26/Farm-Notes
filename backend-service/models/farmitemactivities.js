@@ -23,12 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     customerId: DataTypes.INTEGER,
     farmItemId: DataTypes.INTEGER,
     name: DataTypes.STRING,
-    species: DataTypes.STRING,
-    age: DataTypes.FLOAT,
-    healthStatus: DataTypes.STRING,
     lastFarmActivityDate: DataTypes.DATE,
     nextFarmActivityDate: DataTypes.DATE,
-    feedingSchedule: DataTypes.STRING,
     notes: DataTypes.STRING
   }, {
     sequelize,

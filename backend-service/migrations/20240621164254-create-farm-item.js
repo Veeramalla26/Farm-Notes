@@ -28,6 +28,21 @@ module.exports = {
           key: 'id'
         }
       },
+      itemCode: {
+        type: Sequelize.STRING
+      },
+      species: {
+        type: Sequelize.STRING
+      },
+      dateOfBirth: {
+        type: Sequelize.DATE
+      },
+      healthStatus: {
+        type: Sequelize.STRING
+      },
+      feedingSchedule: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

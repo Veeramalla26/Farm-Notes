@@ -19,12 +19,18 @@ async function createFarmItem(data, customerId) {
     }
 }
 
-async function listFarmItems(customerId) {
+async function listFarmItems(data, customerId) {
     try {
+        let queryObj = { customerId: customerId }
         const customerExists = await models.Customer.findByPk(customerId);
         if(!customerExists) throw new Error('Customer not exists');
+        if (data.categoryId) {
+            const categoryExists = await models.Category.findByPk(data.categoryId);
+            if(!categoryExists) throw new Error('Category not found');
+            queryObj.categoryId = data.categoryId
+        }
         const farmItems = await models.FarmItems.findAndCountAll({
-            where: { customerId },
+            where: queryObj,
             include: [
                 {
                     model: models.Category,

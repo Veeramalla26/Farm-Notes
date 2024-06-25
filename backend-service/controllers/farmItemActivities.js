@@ -1,5 +1,5 @@
-const { func } = require('joi');
 const models = require('../models');
+const Op = require('sequelize').Op;
 
 async function createFarmItemActivities(data, customerId) {
     try {
@@ -21,20 +21,52 @@ async function createFarmItemActivities(data, customerId) {
 }
 
 
-async function listFarmItemActivities(customerId) {
+async function listFarmItemActivities(data, customerId) {
     try {
         const customerExists = await models.Customer.findByPk(customerId);
         if(!customerExists) throw new Error('Customer not exists');
+        let queryObj = { customerId: customerId }
+        if (data.categoryId) {
+            farmItems = await models.FarmItems.findAll({
+                attributes: ['id'],
+                where: { categoryId: data.categoryId }
+            })
+            farmItems = farmItems.map(ele => ele.id)
+            queryObj = {
+                ...queryObj,
+                farmItemId: { [Op.in]: farmItems }
+            }
+        }
         const farmItemActivities = await models.FarmItemActivities.findAndCountAll({
-            where: { customerId },
+            where: queryObj,
             include: [
                 {
                     model: models.FarmItems,
-                    attributes: ['id', 'name']
+                    include: [
+                        {
+                            model: models.Category,
+                            attributes: ['id', 'name']
+                        }
+                    ]
                 }
             ]
         })
-        return farmItemActivities;
+        let response = farmItemActivities.rows.map(ele => {
+            return ({
+                id: ele.id,
+                name: ele.name,
+                lastFarmActivityDate: ele.lastFarmActivityDate,
+                nextFarmActivityDate: ele.nextFarmActivityDate,
+                notes: ele.notes,
+                FarmItem: ele.FarmItem,
+                Category: ele.FarmItem.Category
+            })
+
+        })
+        return {
+            count: farmItemActivities.count,
+            response
+        };
     } catch (error) {
         console.log(error);
         throw error;

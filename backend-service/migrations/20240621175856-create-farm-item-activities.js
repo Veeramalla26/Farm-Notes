@@ -28,23 +28,11 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      species: {
-        type: Sequelize.STRING
-      },
-      age: {
-        type: Sequelize.FLOAT
-      },
-      healthStatus: {
-        type: Sequelize.STRING
-      },
       lastFarmActivityDate: {
         type: Sequelize.DATE
       },
       nextFarmActivityDate: {
         type: Sequelize.DATE
-      },
-      feedingSchedule: {
-        type: Sequelize.STRING
       },
       notes: {
         type: Sequelize.STRING

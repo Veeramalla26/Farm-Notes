@@ -4,24 +4,20 @@ const Joi = require('joi');
 const addFarmItemActivitySchema = Joi.object({
     name: Joi.string().label('Name').required(),
     farmItemId: Joi.number().label('Farm Item Id').required(),
-    species: Joi.string(),
-    age: Joi.number().required(),
-    healthStatus: Joi.string(),
-    lastFarmActivityDate: Joi.date(),
-    nextFarmActivityDate: Joi.date(),
-    feedingSchedule: Joi.string(),
+    lastFarmActivityDate: Joi.date().allow(null),
+    nextFarmActivityDate: Joi.date().required(),
     notes: Joi.string()
 });
 
 const updateFarmItemActivitySchema = Joi.object({
     name: Joi.string().label('Name'),
-    species: Joi.string(),
-    age: Joi.number().required(),
-    healthStatus: Joi.string(),
-    lastFarmActivityDate: Joi.date(),
-    nextFarmActivityDate: Joi.date(),
-    feedingSchedule: Joi.string(),
+    lastFarmActivityDate: Joi.date().allow(null),
+    nextFarmActivityDate: Joi.date().required(),
     notes: Joi.string()
+});
+
+const getFarmItemActivitySchema = Joi.object({
+    categoryId: Joi.number().allow(null)
 });
 
 async function addFarmItemActivities(req, res) {
@@ -44,7 +40,14 @@ async function addFarmItemActivities(req, res) {
 
 async function getFarmItemActivities(req, res) {
     try {
-        const result = await listFarmItemActivities(req.customerId);
+        const data = req.query;
+        if (data) {
+            const { error, value } = getFarmItemActivitySchema.validate(data);
+            if (error) {
+                throw new Error(error.details[0].message);
+            }
+        }
+        const result = await listFarmItemActivities(data, req.customerId);
         res.send(result);
     } catch (error) {
         res.status(400);
