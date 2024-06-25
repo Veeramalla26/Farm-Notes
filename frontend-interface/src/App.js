@@ -5,7 +5,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import './App.scss';
+import "./App.scss";
 import { AuthProvider } from "./context/AuthProvider";
 import PublicRoute from "./routes/PublicRoute";
 import PrivateRoute from "./routes/PrivateRoute";
@@ -36,7 +36,7 @@ const App = () => {
             }
           />
           <Route
-            path="/dashboard"
+            path="/dashboard/*"
             element={
               <PrivateRoute>
                 <Dashboard />
