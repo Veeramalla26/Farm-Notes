@@ -3,11 +3,24 @@ const Joi = require('joi');
 
 const addFarmItemSchema = Joi.object({
     name: Joi.string().label('Name').required(),
-    categoryId: Joi.number().label('Category Id').required()
+    categoryId: Joi.number().label('Category Id').required(),
+    itemCode: Joi.string().required(),
+    species: Joi.string().allow(null),
+    date: Joi.date().allow(null),
+    healthStatus: Joi.string().allow(null),
+    feedingSchedule: Joi.string().allow(null)
 });
 
 const updateFarmItemSchema = Joi.object({
-    name: Joi.string().label('Name').required()
+    name: Joi.string().label('Name').required(),
+    species: Joi.string().allow(null),
+    date: Joi.date().allow(null),
+    healthStatus: Joi.string().allow(null),
+    feedingSchedule: Joi.string().allow(null)
+});
+
+const getFarmItemSchema = Joi.object({
+    categoryId: Joi.number().allow(null)
 });
 
 async function addFarmItem (req, res) {
@@ -29,7 +42,14 @@ async function addFarmItem (req, res) {
 
 async function getFarmItems (req, res) {
     try {
-        const result = await listFarmItems(req.customerId);
+        const data = req.query;
+        if (data) {
+            const { error, value } = getFarmItemSchema.validate(data);
+            if (error) {
+                throw new Error(error.details[0].message);
+            }
+        }
+        const result = await listFarmItems(data, req.customerId);
         res.send(result)
     } catch (error) {
         res.status(400);
