@@ -52,11 +52,20 @@ export const postAddItem = async (data) => {
 };
 export const getFarmItems = async (id) => {
   try {
-    let url = "/farmItems";
-    if (id) {
-      url += `/${id}`;
-    }
-    const response = await axiosInstance.get(url);
+    const response = await axiosInstance.get("/farmItems", {
+      params: id,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching farm items:", error);
+    throw error;
+  }
+};
+export const getFarmItemActivities = async (id) => {
+  try {
+    const response = await axiosInstance.get("/farmItemActivities", {
+      params: id,
+    });
     return response.data;
   } catch (error) {
     console.error("Error fetching farm items:", error);
@@ -72,6 +81,25 @@ export const putEditItem = async (id, data) => {
     throw error;
   }
 };
+export const putEditProfile = async (data) => {
+  try {
+    const response = await axiosInstance.put("/profile", data);
+    return response.data;
+  } catch (error) {
+    console.error("Error editing item:", error);
+    throw error;
+  }
+};
+export const putRestPassword = async (data) => {
+  try {
+    const response = await axiosInstance.post("/reset-password", data);
+    return response.data;
+  } catch (error) {
+    console.error("Error editing item:", error);
+    throw error;
+  }
+};
+
 export const deleteFarmItem = async (id) => {
   try {
     const response = await axiosInstance.delete(`/farmItems/${id}`);
@@ -87,6 +115,24 @@ export const postAddFarmActivity = async (data) => {
     return response.data;
   } catch (error) {
     console.error("Error fetching user data:", error);
+    throw error;
+  }
+};
+export const putEditFarmActivity = async (id, data) => {
+  try {
+    const response = await axiosInstance.put(`/farmItemActivities/${id}`, data);
+    return response.data;
+  } catch (error) {
+    console.error("Error editing item:", error);
+    throw error;
+  }
+};
+export const deleteFarmActivity = async (id) => {
+  try {
+    const response = await axiosInstance.delete(`/farmItemActivities/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error editing item:", error);
     throw error;
   }
 };

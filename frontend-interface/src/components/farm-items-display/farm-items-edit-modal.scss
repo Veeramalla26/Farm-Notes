@@ -1,0 +1,104 @@
+// edit-modal.scss
+.edit-modal {
+    .modal-content {
+        width: 100%;
+        max-width: 900px; // Increased the max-width
+        margin: auto;
+        padding: 2em;
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0;
+        margin-bottom: 1em;
+    }
+    .modal-title {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+    .modal-body {
+        padding: 0;
+        max-height: 500px; // Adjusted to make use of the increased modal size
+        overflow-y: auto;
+    }
+    .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        padding: 0;
+        margin-top: 1em;
+    }
+    .form-group {
+        margin-bottom: 1.5em;
+    }
+    .form-control {
+        width: 100%;
+        padding: 0.75em;
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+        font-size: 1em;
+        transition: border-color 0.3s;
+    }
+    .form-control:focus {
+        border-color: #1f7f19; // Green color for focused fields
+        box-shadow: 0 0 5px rgba(31, 127, 25, 0.5); // Green shadow for focused fields
+    }
+    .form-control.is-invalid {
+        border-color: red;
+        box-shadow: none;
+    }
+    button {
+        margin-right: 10px;
+    }
+    .close-button {
+        background-color: lightgrey;
+        border-color: lightgrey;
+    }
+    .edit-item-button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+    }
+    .edit-item-button:hover {
+        background-color: #0056b3;
+    }
+    select.form-control {
+        color: #000;
+        padding: 0.75em;
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+        font-size: 1em;
+        transition: border-color 0.3s;
+    }
+    select.form-control:focus {
+        border-color: #1f7f19; // Green color for focused fields
+        box-shadow: 0 0 5px rgba(31, 127, 25, 0.5); // Green shadow for focused fields
+    }
+    select.form-control option {
+        color: #000;
+        background-color: #fff;
+        transition: background-color 0.3s;
+    }
+    select.form-control option:checked {
+        color: #fff;
+        background-color: #007bff;
+    }
+    .text-danger {
+        color: red;
+        font-size: 0.875em;
+    }
+    .form-row {
+        display: flex;
+        justify-content: space-between;
+    }
+    .half-width {
+        flex: 0 0 48%;
+    }
+    .delete-text {
+        color: #000;
+        font-size: 18px;
+    }
+}

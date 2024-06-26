@@ -1,25 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Button, Form, Alert } from "react-bootstrap";
-import axios from "axios";
-import DatePicker from "react-datepicker";
+import { Modal, Button, Form } from "react-bootstrap";
 import "react-datepicker/dist/react-datepicker.css";
 import "../add-item-modal/add-item-modal.scss"; // Make sure your SCSS file is correctly importing
 
-import { getCategories } from "../../serviceApis/loginapi";
-
-const AddActivityModal = ({ show, handleClose, handleAddActivity, item }) => {
-  const [categories, setCategories] = useState([]);
-  const [name, setName] = useState(""); // Prefill with itemName if available
-  const [farmItemId, setFarmItemId] = useState(item?.id || "");
-  const [itemCode, setItemCode] = useState(item?.itemCode);
-  const [lastFarmActivityDate, setLastFarmActivityDate] = useState(
-    getTodayDate()
-  );
-  const [nextFarmActivityDate, setNextFarmActivityDate] = useState(null); // Using null initially for DatePicker
+const EditActivityModal = ({
+  show,
+  handleClose,
+  handleEditActivity,
+  activity,
+}) => {
+  const [name, setName] = useState("");
+  const [farmItemId, setFarmItemId] = useState("");
+  const [itemCode, setItemCode] = useState("");
+  const [lastFarmActivityDate, setLastFarmActivityDate] = useState("");
+  const [nextFarmActivityDate, setNextFarmActivityDate] = useState("");
   const [notes, setNotes] = useState("");
   const [showErrors, setShowErrors] = useState(false);
 
-  // Function to get today's date in 'YYYY-MM-DD' format
+  useEffect(() => {
+    if (show && activity) {
+      setName(activity.name);
+      setFarmItemId(activity.FarmItem?.id);
+      setItemCode(activity.FarmItem?.itemCode);
+      setLastFarmActivityDate(formatDate(activity.lastFarmActivityDate));
+      setNextFarmActivityDate(formatDate(activity.nextFarmActivityDate));
+      setNotes(activity.notes);
+      setShowErrors(false); // Reset errors on modal open
+    }
+  }, [show, activity]);
+
   function getTodayDate() {
     const today = new Date();
     const year = today.getFullYear();
@@ -30,59 +39,51 @@ const AddActivityModal = ({ show, handleClose, handleAddActivity, item }) => {
     return `${year}-${month}-${day}`;
   }
 
-  const handleFetchCategories = async () => {
-    try {
-      const categoriesData = await getCategories();
-      setCategories(categoriesData);
-    } catch (error) {
-      console.error("Error fetching categories:", error);
-    }
-  };
-
-  useEffect(() => {
-    handleFetchCategories();
-  }, []);
+  function formatDate(dateString) {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    if (month < 10) month = `0${month}`;
+    if (day < 10) day = `0${day}`;
+    return `${year}-${month}-${day}`;
+  }
 
   const handleSubmit = () => {
     if (!name || !farmItemId || !nextFarmActivityDate) {
       setShowErrors(true);
     } else {
-      handleAddActivity({
+      handleEditActivity(activity.id, {
         name,
-        farmItemId,
         lastFarmActivityDate,
         nextFarmActivityDate: nextFarmActivityDate || undefined,
         notes: notes || undefined,
       });
-
       handleClose();
-      // Reset form fields
-      setName("");
-
-      setLastFarmActivityDate(getTodayDate());
-      setNextFarmActivityDate(null); // Reset DatePicker to initial state
-
-      setNotes("");
-      setShowErrors(false);
+      resetForm();
     }
   };
 
   const handleModalClose = () => {
-    // Reset form fields and error state
+    handleClose();
+    resetForm();
+  };
+
+  const resetForm = () => {
     setName("");
-
-    setLastFarmActivityDate(getTodayDate());
-    setNextFarmActivityDate(null); // Reset DatePicker to initial state
-
+    setFarmItemId("");
+    setItemCode("");
+    setLastFarmActivityDate("");
+    setNextFarmActivityDate("");
     setNotes("");
     setShowErrors(false);
-    handleClose();
   };
 
   return (
     <Modal show={show} onHide={handleModalClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Add Farm Activity</Modal.Title>
+        <Modal.Title>Edit Farm Activity</Modal.Title>
       </Modal.Header>
       <Modal.Body className="modal-body">
         <Form>
@@ -136,7 +137,9 @@ const AddActivityModal = ({ show, handleClose, handleAddActivity, item }) => {
               <Form.Control
                 type="date"
                 value={lastFarmActivityDate}
-                onChange={(e) => setLastFarmActivityDate(e.target.value)}
+                onChange={(e) =>
+                  setLastFarmActivityDate(formatDate(e.target.value))
+                }
                 className="form-control"
                 disabled
               />
@@ -150,9 +153,11 @@ const AddActivityModal = ({ show, handleClose, handleAddActivity, item }) => {
               <Form.Control
                 type="date"
                 value={nextFarmActivityDate}
-                onChange={(e) => setNextFarmActivityDate(e.target.value)}
+                onChange={(e) =>
+                  setNextFarmActivityDate(formatDate(e.target.value))
+                }
                 className={`form-control ${
-                  showErrors && !farmItemId && "is-invalid"
+                  showErrors && !nextFarmActivityDate && "is-invalid"
                 }`}
               />
               {showErrors && !nextFarmActivityDate && (
@@ -188,11 +193,11 @@ const AddActivityModal = ({ show, handleClose, handleAddActivity, item }) => {
           onClick={handleSubmit}
           className="add-item-button"
         >
-          Add Activity
+          Save Changes
         </Button>
       </Modal.Footer>
     </Modal>
   );
 };
 
-export default AddActivityModal;
+export default EditActivityModal;

@@ -74,3 +74,30 @@
         }
     }
 }
+
+.refresh {
+    color: #1f7f19;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+}
+
+.refresh {
+    display: flex;
+    align-items: center;
+    color: green;
+    cursor: pointer;
+}
+
+.refresh-icon {
+    margin-left: 0.5rem;
+}
