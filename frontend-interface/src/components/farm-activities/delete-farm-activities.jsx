@@ -1,13 +1,12 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import "../add-item-modal/add-item-modal.scss";
-import { deleteFarmItem } from "../../serviceApis/loginapi";
+import { deleteFarmActivity } from "../../serviceApis/loginapi";
 
 const DeleteModal = ({ show, handleClose, selectedItem, fetchItems }) => {
   const handleConfirmDelete = async () => {
     try {
-      await deleteFarmItem(selectedItem.id); // Assuming selectedItem has an 'id' property
-      fetchItems(); // Refresh items after deletion
+      await deleteFarmActivity(selectedItem.id);
       handleClose();
     } catch (error) {
       console.error("Error deleting item:", error);

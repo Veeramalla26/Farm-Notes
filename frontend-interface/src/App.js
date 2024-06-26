@@ -12,6 +12,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 import Login from "./components/auth/Login";
 import SignUp from "./components/auth/SignUp";
 import Dashboard from "./pages/dashboard/Dashboard";
+import FarmActivities from "./components/farm-activities/display-farm-activities";
 
 const App = () => {
   return (
@@ -43,6 +44,7 @@ const App = () => {
               </PrivateRoute>
             }
           />
+          <Route path="/activities" element={<FarmActivities />} />
         </Routes>
       </Router>
     </AuthProvider>

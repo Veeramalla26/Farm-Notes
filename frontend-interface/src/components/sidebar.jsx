@@ -1,5 +1,16 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import {
+  FaHome,
+  FaDog,
+  FaLeaf,
+  FaFish,
+  FaCrow,
+  FaCat,
+  FaTractor,
+  FaBuilding,
+  FaBox,
+} from "react-icons/fa"; // Import icons from react-icons
 
 const Sidebar = () => (
   <div className="sidebar">
@@ -7,73 +18,82 @@ const Sidebar = () => (
       <li>
         <NavLink
           to="/dashboard/items"
-          className={({ isActive }) => (isActive ? "active" : "")}
+          activeClassName="active"
+          className="sidebar-link"
         >
-          Dashboard
+          <FaHome className="sidebar-icon" /> Dashboard
         </NavLink>
       </li>
       <li>
         <NavLink
           to="/dashboard/animals"
-          className={({ isActive }) => (isActive ? "active" : "")}
+          activeClassName="active"
+          className="sidebar-link"
         >
-          Animals
+          <FaDog className="sidebar-icon" /> Animals
         </NavLink>
       </li>
       <li>
         <NavLink
           to="/dashboard/crops"
-          className={({ isActive }) => (isActive ? "active" : "")}
+          activeClassName="active"
+          className="sidebar-link"
         >
-          Crops
+          <FaLeaf className="sidebar-icon" /> Crops
         </NavLink>
       </li>
       <li>
         <NavLink
           to="/dashboard/aquatic"
-          className={({ isActive }) => (isActive ? "active" : "")}
+          activeClassName="active"
+          className="sidebar-link"
         >
-          Aquatic Creatures
+          <FaFish className="sidebar-icon" /> Aquatic Creatures
         </NavLink>
       </li>
       <li>
         <NavLink
           to="/dashboard/poultry"
-          className={({ isActive }) => (isActive ? "active" : "")}
+          activeClassName="active"
+          className="sidebar-link"
         >
-          Poultry
+          <FaCrow className="sidebar-icon" /> Poultry
         </NavLink>
       </li>
       <li>
         <NavLink
           to="/dashboard/pets"
-          className={({ isActive }) => (isActive ? "active" : "")}
+          activeClassName="active"
+          className="sidebar-link"
         >
-          Pets
+          <FaCat className="sidebar-icon" /> Pets
         </NavLink>
       </li>
       <li>
         <NavLink
           to="/dashboard/machinery"
-          className={({ isActive }) => (isActive ? "active" : "")}
+          activeClassName="active"
+          className="sidebar-link"
         >
-          Machinery
+          <FaTractor className="sidebar-icon" /> Machinery
         </NavLink>
       </li>
       <li>
         <NavLink
           to="/dashboard/infrastructure"
-          className={({ isActive }) => (isActive ? "active" : "")}
+          activeClassName="active"
+          className="sidebar-link"
         >
-          Infrastructure
+          <FaBuilding className="sidebar-icon" /> Infrastructure
         </NavLink>
       </li>
       <li>
         <NavLink
           to="/dashboard/supplies"
-          className={({ isActive }) => (isActive ? "active" : "")}
+          activeClassName="active"
+          className="sidebar-link"
         >
-          Supplies
+          <FaBox className="sidebar-icon" /> Supplies
         </NavLink>
       </li>
     </ul>

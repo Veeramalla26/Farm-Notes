@@ -2,6 +2,17 @@
     padding: 20px;
 }
 
+.back-button {
+    background-color: rgb(94, 80, 80);
+    margin: 10px;
+    border: rgb(94, 80, 80);
+}
+
+.back-button:hover {
+    background-color: rgb(94, 80, 80);
+    border: rgb(94, 80, 80);
+}
+
 .banner {
     background-color: #c7e8c3;
     /* Light green */
@@ -15,11 +26,12 @@
 
 .item-details {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .item-detail {
     display: flex;
+    flex-direction: row;
     margin-bottom: 10px;
 }
 
@@ -31,8 +43,8 @@
 }
 
 .item-detail span {
-    color: #156c14;
-    /* Slightly darker green */
+    color: #000;
+    /* Black */
 }
 
 .actions {
@@ -53,4 +65,87 @@
 .button-add-activity:hover {
     background-color: #156c14;
     /* Slightly darker green */
+}
+
+.farm-activities {
+    .banner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        .item-details {
+            flex: 1;
+        }
+        .actions {
+            margin-left: 1rem;
+            display: flex;
+            align-items: center;
+        }
+    }
+    .activity-list-container {
+        max-height: 400px; // Adjust as needed
+        overflow-y: auto;
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    .activity-list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .activity-card {
+        margin: 1rem;
+        &:hover {
+            border: 1px solid #1f7f19; // Highlight on focus
+            box-shadow: 0 0 10px rgba(31, 127, 25, 0.5); // Add shadow on focus
+        }
+        .activity-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+        .button-container {
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .edit-button {
+            background-color: #28a745; // Green for edit
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100px;
+            height: auto;
+        }
+        .edit-button:hover {
+            background-color: #218838; // Darker green for edit hover
+        }
+        .delete-button {
+            background-color: #dc3545; // Red for delete
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100px;
+            height: auto;
+        }
+        .delete-button:hover {
+            background-color: #c82333; // Darker red for delete hover
+        }
+    }
+    .error-message {
+        margin-top: 1rem;
+    }
+    .activity-card label {
+        font-weight: bold;
+        margin-right: 5px;
+        color: #000; // Black color for labels
+    }
+    .activity-card span {
+        color: #000; // Black color for label values
+    }
 }

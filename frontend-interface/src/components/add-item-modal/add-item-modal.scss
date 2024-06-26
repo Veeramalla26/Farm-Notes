@@ -1,14 +1,11 @@
-/* add-item-modal.scss */
-
 .modal-content {
     width: 100%;
-    max-width: 500px;
+    max-width: 900px; // Increased the max-width
     margin: auto;
     padding: 2em;
     border-radius: 10px;
     border: none;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    align-items: normal;
 }
 
 .modal-header {
@@ -26,6 +23,8 @@
 
 .modal-body {
     padding: 0;
+    max-height: 500px; // Adjusted to make use of the increased modal size
+    overflow-y: auto;
 }
 
 .modal-footer {
@@ -49,8 +48,13 @@
 }
 
 .form-control:focus {
-    border-color: #1f7f19;
-    box-shadow: 0 0 5px rgba(31, 127, 25, 0.5);
+    border-color: #1f7f19; // Green color for focused fields
+    box-shadow: 0 0 5px rgba(31, 127, 25, 0.5); // Green shadow for focused fields
+}
+
+.form-control.is-invalid {
+    border-color: red;
+    box-shadow: none;
 }
 
 button {
@@ -74,7 +78,6 @@ button.add-item-button:hover {
 
 select.form-control {
     color: #000;
-    /* Black color for placeholder */
     padding: 0.75em;
     border-radius: 5px;
     border: 1px solid #ced4da;
@@ -83,28 +86,36 @@ select.form-control {
 }
 
 select.form-control:focus {
-    border-color: #1f7f19;
-    box-shadow: 0 0 5px rgba(31, 127, 25, 0.5);
+    border-color: #1f7f19; // Green color for focused fields
+    box-shadow: 0 0 5px rgba(31, 127, 25, 0.5); // Green shadow for focused fields
 }
 
 select.form-control option {
     color: #000;
-    /* Black color for options */
     background-color: #fff;
-    /* White background */
     transition: background-color 0.3s;
 }
 
 select.form-control option:checked {
     color: #fff;
-    /* White color for selected option */
     background-color: #1f7f19;
-    /* Green background */
 }
 
 .text-danger {
     color: red;
-    /* Error message color */
     font-size: 0.875em;
-    /* Adjust font size if needed */
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.half-width {
+    flex: 0 0 48%;
+}
+
+.delete-text {
+    color: #000;
+    font-size: 18px;
 }
