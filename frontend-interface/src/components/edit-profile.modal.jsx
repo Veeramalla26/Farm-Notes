@@ -53,7 +53,7 @@ const EditProfileModal = ({ show, handleClose, profile, handleSave }) => {
       } else {
         setErrors((prevErrors) => ({
           ...prevErrors,
-          pinCode: "Pin code must be a number",
+          pinCode: "Zip code must be a number",
         }));
       }
     } else {
@@ -79,9 +79,9 @@ const EditProfileModal = ({ show, handleClose, profile, handleSave }) => {
 
     // Pin code validation
     if (!formData.pinCode) {
-      newErrors.pinCode = "Pin code is required";
+      newErrors.pinCode = "Zip code is required";
     } else if (!/^\d+$/.test(formData.pinCode)) {
-      newErrors.pinCode = "Pin code must be a number";
+      newErrors.pinCode = "Zip code must be a number";
     }
 
     return newErrors;
@@ -203,13 +203,13 @@ const EditProfileModal = ({ show, handleClose, profile, handleSave }) => {
               controlId="formPinCode"
               className="form-group half-width"
             >
-              <Form.Label>Pin Code</Form.Label>
+              <Form.Label>Zip Code</Form.Label>
               <Form.Control
                 type="text"
                 name="pinCode"
                 value={formData.pinCode}
                 onChange={handleChange}
-                placeholder="Enter pin code"
+                placeholder="Enter Zip code"
                 required
                 isInvalid={!!errors.pinCode}
               />

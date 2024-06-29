@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./signup.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { signUp } from "../../serviceApis/loginapi";
+import logo from "../../assets/FarmNotes.png";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -9,14 +10,14 @@ const SignUp = () => {
     userName: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -31,7 +32,12 @@ const SignUp = () => {
       return;
     }
     try {
-      const userData = await signUp({ userName, email, password, confirmPassword });
+      const userData = await signUp({
+        userName,
+        email,
+        password,
+        confirmPassword,
+      });
       console.log("user->", userData);
       // Handle successful signup, e.g., navigate to login or dashboard
       navigate("/login");
@@ -44,7 +50,8 @@ const SignUp = () => {
   return (
     <div className="auth-container">
       <div className="log-form">
-        <h2>Create an account</h2>
+        <img src={logo} alt="Logo" className="logo" />
+        <h4>Create an account</h4>
         <form>
           <input
             type="text"

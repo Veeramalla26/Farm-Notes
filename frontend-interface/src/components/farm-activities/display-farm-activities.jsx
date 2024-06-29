@@ -114,9 +114,12 @@ const FarmActivities = () => {
 
   return (
     <div className="farm-activities">
-      <Button className="back-button" onClick={() => navigate(-1)}>
-        <FaArrowLeft /> Back
-      </Button>
+      <div className="header">
+        <Button className="back-button" onClick={() => navigate(-1)}>
+          <FaArrowLeft /> Back
+        </Button>
+        <h4>Farm Item Activity Details</h4>
+      </div>
       <div className="banner">
         <div className="item-details">
           <Card className="mb-3">
@@ -219,15 +222,19 @@ const FarmActivities = () => {
               >
                 <Card.Body>
                   <Card.Text>
-                    <label>Name:</label> <span>{activity.name}</span>
+                    <label>Name:</label> <span>{activity.name || "-"}</span>
                   </Card.Text>
                   <Card.Text>
                     <label>Last Farm Activity Date:</label>{" "}
-                    <span>{formatDate(activity.lastFarmActivityDate)}</span>
+                    <span>
+                      {formatDate(activity.lastFarmActivityDate || "-")}
+                    </span>
                   </Card.Text>
                   <Card.Text>
                     <label>Next Farm Activity Date:</label>{" "}
-                    <span>{formatDate(activity.nextFarmActivityDate)}</span>
+                    <span>
+                      {formatDate(activity.nextFarmActivityDate || "-")}
+                    </span>
                   </Card.Text>
                   <Card.Text>
                     <label>Notes:</label> <span>{activity.notes || "-"}</span>
