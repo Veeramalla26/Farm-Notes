@@ -25,6 +25,10 @@ import ItemList from "../../components/farm-items-display/farm-items-display";
 import AddItemModal from "../../components/add-item-modal/add-item-modal"; // Adjust the path as needed
 import EditProfileModal from "../../components/edit-profile.modal";
 import ResetPasswordModal from "../../components/reset-password";
+import AdminSidebar from "../../components/admin-sidebar";
+import UserDetails from "../../components/admin-dashboard/user-details-listing";
+import DoughnutChart from "../../components/doughtnut-chart";
+import ShowAdminItemsActivities from "../../components/admin-dashboard/show-admin-items-activities";
 
 const Dashboard = () => {
   const { logout } = useAuth();
@@ -33,7 +37,12 @@ const Dashboard = () => {
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showSecurityModal, setShowSecurityModal] = useState(false);
   const [profile, setProfile] = useState(null);
-
+  const [userDetails, setUserDetails] = useState(
+    JSON.parse(localStorage.getItem("user"))
+  );
+  useEffect(() => {
+    setUserDetails(JSON.parse(localStorage.getItem("user")));
+  }, []);
   const handleOffcanvasClose = () => setShowOffcanvas(false);
   const handleOffcanvasShow = () => setShowOffcanvas(true);
 
@@ -84,6 +93,7 @@ const Dashboard = () => {
       console.error("Error updating profile:", error);
     }
   };
+
   const handleRestPassword = async (profileData) => {
     try {
       const response = await putRestPassword({
@@ -111,13 +121,15 @@ const Dashboard = () => {
           <Navbar.Brand href="#">
             <img src={FarmNotesLogo} alt="FarmNotes Logo" className="logo" />
           </Navbar.Brand>
-          <Button
-            variant="success"
-            className="ms-auto add-item-button"
-            onClick={handleModalShow}
-          >
-            <FaPlus className="me-2" /> Add Farm Item
-          </Button>
+          {userDetails?.role === "User" && ( // Conditionally render the add item button
+            <Button
+              variant="success"
+              className="ms-auto add-item-button"
+              onClick={handleModalShow}
+            >
+              <FaPlus className="me-2" /> Add Farm Item
+            </Button>
+          )}
           <Navbar.Toggle
             aria-controls="offcanvasNavbar"
             onClick={handleOffcanvasShow}
@@ -203,30 +215,127 @@ const Dashboard = () => {
         handleSave={handleRestPassword}
       />
       <div className="main-content">
-        <Sidebar />
-        <div className="content">
-          <Routes>
-            <Route index element={<Navigate to="items" />} />
-            <Route path="items" element={<ItemList />} />
-            <Route path="animals" element={<ItemList id="1" key="animals" />} />
-            <Route path="crops" element={<ItemList id="2" key="crops" />} />
-            <Route path="aquatic" element={<ItemList id="3" key="aquatic" />} />
-            <Route path="poultry" element={<ItemList id="4" key="poultry" />} />
-            <Route path="pets" element={<ItemList id="5" key="pets" />} />
-            <Route
-              path="machinery"
-              element={<ItemList id="6" key="machinery" />}
-            />
-            <Route
-              path="infrastructure"
-              element={<ItemList id="7" key="infrastructure" />}
-            />
-            <Route
-              path="supplies"
-              element={<ItemList id="8" key="supplies" />}
-            />
-          </Routes>
-        </div>
+        {userDetails?.role === "User" ? (
+          <>
+            <Sidebar />
+            <div className="content">
+              <Routes>
+                <Route index element={<Navigate to="items" />} />
+                <Route path="items" element={<ItemList />} />
+                <Route
+                  path="animals"
+                  element={<ItemList id="1" key="animals" />}
+                />
+                <Route path="crops" element={<ItemList id="2" key="crops" />} />
+                <Route
+                  path="aquatic"
+                  element={<ItemList id="3" key="aquatic" />}
+                />
+                <Route
+                  path="poultry"
+                  element={<ItemList id="4" key="poultry" />}
+                />
+                <Route path="pets" element={<ItemList id="5" key="pets" />} />
+                <Route
+                  path="machinery"
+                  element={<ItemList id="6" key="machinery" />}
+                />
+                <Route
+                  path="infrastructure"
+                  element={<ItemList id="7" key="infrastructure" />}
+                />
+                <Route
+                  path="supplies"
+                  element={<ItemList id="8" key="supplies" />}
+                />
+              </Routes>
+            </div>
+          </>
+        ) : (
+          <>
+            <AdminSidebar />
+            <div className="content">
+              <Routes>
+                <Route index element={<Navigate to="userDetails" />} />
+                <Route path="userDetails" element={<UserDetails />} />
+                <Route path="allCount" element={<ShowAdminItemsActivities />} />
+                <Route
+                  path="animals"
+                  element={
+                    <ShowAdminItemsActivities
+                      id="1"
+                      key="animals"
+                      name="Animals"
+                    />
+                  }
+                />
+                <Route
+                  path="crops"
+                  element={
+                    <ShowAdminItemsActivities id="2" key="crops" name="Crops" />
+                  }
+                />
+                <Route
+                  path="aquatic"
+                  element={
+                    <ShowAdminItemsActivities
+                      id="3"
+                      key="aquatic"
+                      name="Aquatic Creatures"
+                    />
+                  }
+                />
+
+                <Route
+                  path="poultry"
+                  element={
+                    <ShowAdminItemsActivities
+                      id="4"
+                      key="poultry"
+                      name="Poultry"
+                    />
+                  }
+                />
+                <Route
+                  path="pets"
+                  element={
+                    <ShowAdminItemsActivities id="5" key="pets" name="Pets" />
+                  }
+                />
+                <Route
+                  path="machinery"
+                  element={
+                    <ShowAdminItemsActivities
+                      id="6"
+                      key="machinery"
+                      name="Machinery"
+                    />
+                  }
+                />
+                <Route
+                  path="infrastructure"
+                  element={
+                    <ShowAdminItemsActivities
+                      id="7"
+                      key="infrastructure"
+                      name="Infrastructure"
+                    />
+                  }
+                />
+                <Route
+                  path="supplies"
+                  element={
+                    <ShowAdminItemsActivities
+                      id="8"
+                      key="supplies"
+                      name="Supplies"
+                    />
+                  }
+                />
+              </Routes>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

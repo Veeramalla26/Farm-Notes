@@ -40,6 +40,15 @@ export const getCategories = async () => {
     throw error;
   }
 };
+export const getUserDetails = async () => {
+  try {
+    const response = await axiosInstance.get("/users");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error;
+  }
+};
 
 export const postAddItem = async (data) => {
   try {
