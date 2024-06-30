@@ -25,7 +25,8 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     lastFarmActivityDate: DataTypes.DATE,
     nextFarmActivityDate: DataTypes.DATE,
-    notes: DataTypes.STRING
+    notes: DataTypes.STRING,
+    amount: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'FarmItemActivities',

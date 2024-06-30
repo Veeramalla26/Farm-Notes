@@ -55,6 +55,7 @@ async function listFarmItemActivities(data, customerId) {
             return ({
                 id: ele.id,
                 name: ele.name,
+                amount: ele.amount,
                 lastFarmActivityDate: ele.lastFarmActivityDate,
                 nextFarmActivityDate: ele.nextFarmActivityDate,
                 notes: ele.notes,

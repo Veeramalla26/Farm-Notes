@@ -4,16 +4,18 @@ const Joi = require('joi');
 const addFarmItemActivitySchema = Joi.object({
     name: Joi.string().label('Name').required(),
     farmItemId: Joi.number().label('Farm Item Id').required(),
-    lastFarmActivityDate: Joi.date().allow(null),
+    lastFarmActivityDate: Joi.date().allow(null, ''),
     nextFarmActivityDate: Joi.date().required(),
-    notes: Joi.string()
+    notes: Joi.string().allow(null, ''),
+    amount: Joi.number().required()
 });
 
 const updateFarmItemActivitySchema = Joi.object({
     name: Joi.string().label('Name'),
     lastFarmActivityDate: Joi.date().allow(null),
     nextFarmActivityDate: Joi.date().required(),
-    notes: Joi.string()
+    notes: Joi.string(),
+    amount: Joi.number().required()
 });
 
 const getFarmItemActivitySchema = Joi.object({
