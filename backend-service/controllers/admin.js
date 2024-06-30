@@ -1,4 +1,5 @@
-const models = require('../models')
+const models = require('../models');
+const logger = require('../services/logger');
 const Op = require('sequelize').Op;
 
 async function totalCount(data) {
@@ -41,7 +42,7 @@ async function totalCount(data) {
             response
           }
     } catch (error) {
-      console.log(error);
+      logger.error(error);
       throw error;
     }
   }
