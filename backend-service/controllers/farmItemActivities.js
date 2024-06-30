@@ -15,7 +15,7 @@ async function createFarmItemActivities(data, customerId) {
         });
         return farmItemActivity;
     } catch(error) {
-        console.log(error);
+        logger.error(error);
         throw error;
     }
 }
@@ -69,7 +69,7 @@ async function listFarmItemActivities(data, customerId) {
             response
         };
     } catch (error) {
-        console.log(error);
+        logger.error(error);
         throw error;
     }
 }
@@ -87,7 +87,7 @@ async function editFarmItemActivities(farmItemActivityId, data, customerId) {
             ...data
         }
     } catch(error) {
-        console.log(error);
+        logger.error(error);
         throw error;
     }
 }
@@ -101,7 +101,7 @@ async function destroyFarmItemActivities(farmItemActivityId) {
             id: farmItemActivityId
         }
     } catch(error) {
-        console.log(error);
+        logger.error(error);
         throw error;
     }
 }

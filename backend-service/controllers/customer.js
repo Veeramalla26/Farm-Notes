@@ -23,7 +23,7 @@ async function register(data) {
       userName: data.userName,
     };
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     throw error;
   }
 }
@@ -73,7 +73,7 @@ async function login(data) {
       };
     }
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     throw error;
   }
 }
@@ -88,7 +88,6 @@ async function validateToken(req, res, next) {
       return err;
     } else {
       req.customerId = decoded.sub;
-      console.log("1", req.customerId);
       next();
     }
   });
@@ -96,7 +95,6 @@ async function validateToken(req, res, next) {
 
 async function getUser(customerId) {
   try {
-    console.log("2", customerId);
     if (!customerId) throw new Error("Customer Id is required");
     const customerExists = await models.Customer.findByPk(customerId);
     if (!customerExists) throw new Error("User not Exists");
@@ -104,7 +102,7 @@ async function getUser(customerId) {
       ...omitPassword(customerExists.get()),
     };
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     throw error;
   }
 }
@@ -123,7 +121,7 @@ async function updateUser(data, customerId) {
     });
     return customer;
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     throw error;
   }
 }
@@ -150,7 +148,7 @@ async function passwordReset(email, password) {
       email: email,
     };
   } catch (err) {
-    console.log(err);
+    logger.error(err);
     throw err;
   }
 }
@@ -169,7 +167,7 @@ const checkRole = (roles) => {
 
       next();
     } catch (error) {
-      console.error("Error in role middleware:", error);
+      logger.error(`Error in role middleware: ${error}`);
       res.status(500).json({ message: "Internal server error" });
     }
   };
@@ -225,7 +223,7 @@ async function listCustomers() {
       result: response,
     };
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     throw error;
   }
 }

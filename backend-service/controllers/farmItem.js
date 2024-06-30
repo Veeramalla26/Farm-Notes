@@ -14,7 +14,7 @@ async function createFarmItem(data, customerId) {
         });
         return farmItem;
     } catch(error) {
-        console.log(error);
+        logger.error(error);
         throw error;
     }
 }
@@ -46,7 +46,7 @@ async function listFarmItems(data, customerId) {
             totalAmount = ele.FarmItemActivities.reduce((itemSum, activity) => {
                 return itemSum + parseFloat(activity.amount);
             }, 0);
-            console.log(totalAmount)
+        
             return ({
                 id: ele.id,
                 name: ele.name,
@@ -61,9 +61,12 @@ async function listFarmItems(data, customerId) {
             })
 
         })
-        return response;
+        return {
+            count: farmItems.count,
+            rows: response,
+          };
     } catch(error) {
-        console.log(error);
+        logger.error(error);
         throw error;
     }
 }
@@ -80,7 +83,7 @@ async function editFarmItem(farmItemId, data, customerId) {
             name: data.name
         }
     } catch(error) {
-        console.log(error);
+        logger.error(error);
         throw error;
     }
 }
@@ -94,7 +97,7 @@ async function destroyFarmItem(farmItemId) {
             id: farmItemId
         }
     } catch(error) {
-        console.log(error);
+        logger.error(error);
         throw error;
     }
 }
@@ -104,7 +107,7 @@ async function listCategories() {
         const categories = await models.Category.findAll()
         return categories;
     } catch (error) {
-        console.log(error);
+        logger.error(error);
         throw error;
     }
 }
