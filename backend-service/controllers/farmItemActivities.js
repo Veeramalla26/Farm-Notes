@@ -1,5 +1,6 @@
 const models = require('../models');
 const Op = require('sequelize').Op;
+const logger = require("../services/logger");
 
 async function createFarmItemActivities(data, customerId) {
     try {
