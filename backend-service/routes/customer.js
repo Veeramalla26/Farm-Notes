@@ -40,7 +40,8 @@ async function registerUser(req, res) {
             throw new Error(error.details[0].message);
         }
         const result = await register(data);
-        res.send(result);
+        res.status(result.statusCode || 200);
+        res.send(result.message || result);
     } catch (error) {
         res.status(400);
         res.send({
@@ -57,7 +58,8 @@ async function loginUser(req, res) {
             throw new Error(error.details[0].message);
         }
         const result = await login(data);
-        res.send(result);
+        res.status(result.statusCode || 200);
+        res.send(result.message || result);
     } catch (error) {
         res.status(400);
         res.send({
@@ -70,7 +72,8 @@ async function getCustomer(req, res) {
     try {
         const data = req.customerId;
         const result = await getUser(data);
-        res.send(result);
+        res.status(result.statusCode || 200);
+        res.send(result.message || result);
     } catch (error) {
         res.status(400);
         res.send({
@@ -87,7 +90,8 @@ async function updateCustomer(req, res) {
             throw new Error(error.details[0].message);
         }
         const result = await updateUser(data, req.customerId);
-        res.send(result);
+        res.status(result.statusCode || 200);
+        res.send(result.message || result);
     } catch (error) {
         res.status(400);
         res.send({
@@ -104,7 +108,8 @@ async function resetPassword(req, res) {
             throw new Error(error.details[0].message);
         }
         const result = await passwordReset(data.email, data.password, data.confirmPassword);
-        res.send(result);
+        res.status(result.statusCode || 200);
+        res.send(result.message || result);
     } catch (error) {
         res.status(400);
         res.send({
@@ -116,7 +121,8 @@ async function resetPassword(req, res) {
 async function customerListing(req, res) {
     try {
         const result = await listCustomers();
-        res.send(result);
+        res.status(result.statusCode || 200);
+        res.send(result.message || result);
     } catch (error) {
         res.status(400);
         res.send({

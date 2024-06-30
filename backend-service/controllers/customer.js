@@ -19,6 +19,7 @@ async function register(data) {
       email: data.email,
       role: "User",
     });
+    logger.info(`User registered successfully`);
     return {
       email: data.email,
       userName: data.userName,
@@ -49,6 +50,7 @@ async function login(data) {
           expiresIn: "7d",
         });
 
+        logger.info(`Login successful`)
         return {
           statusCode: 200,
           message: {
@@ -58,6 +60,7 @@ async function login(data) {
           },
         };
       } else {
+        logger.error("Authentication failed");
         return {
           statusCode: 401,
           message: {
@@ -66,6 +69,7 @@ async function login(data) {
         };
       }
     } else {
+      logger.error("Authentication failed");
       return {
         statusCode: 401,
         message: {
@@ -82,6 +86,7 @@ async function login(data) {
 async function validateToken(req, res, next) {
   const token = req.headers["authorization"];
   if (!token) {
+    logger.error('No token provided');
     return res.status(403).send({ message: "No token provided!" });
   }
   jwt.verify(token, process.env.secret, function (err, decoded) {
@@ -89,6 +94,7 @@ async function validateToken(req, res, next) {
       return err;
     } else {
       req.customerId = decoded.sub;
+      logger.info(`Token validated successfully`);
       next();
     }
   });
@@ -99,6 +105,7 @@ async function getUser(customerId) {
     if (!customerId) throw new Error("Customer Id is required");
     const customerExists = await models.Customer.findByPk(customerId);
     if (!customerExists) throw new Error("User not Exists");
+    logger.info(`User fetched successfully`);
     return {
       ...omitPassword(customerExists.get()),
     };
@@ -120,6 +127,7 @@ async function updateUser(data, customerId) {
     const customer = await models.Customer.update(data, {
       where: { id: customerId },
     });
+    logger.info(`User updated successfully`);
     return customer;
   } catch (error) {
     logger.error(error);
@@ -144,6 +152,7 @@ async function passwordReset(email, password) {
       { where: { id: customer.id } }
     );
 
+    logger.info(`Password updated successfully`);
     return {
       id: customer.id,
       email: email,
@@ -159,13 +168,16 @@ const checkRole = (roles) => {
     try {
       const customer = await models.Customer.findByPk(req.customerId); // assuming customerId is set in req object
       if (!customer) {
+        logger.error("User not found");
         return res.status(404).json({ message: "User not found" });
       }
 
       if (!roles.includes(customer.role)) {
+        logger.error("Access denied");
         return res.status(403).json({ message: "Access denied" });
       }
 
+      logger.info('Role verified successfully');
       next();
     } catch (error) {
       logger.error(`Error in role middleware: ${error}`);
@@ -219,6 +231,7 @@ async function listCustomers() {
         FarmItemActivities: farmItemActivitiesCount
       };
     });
+    logger.info(`Fetched customers`)
     return {
       count: customers.count,
       result: response,

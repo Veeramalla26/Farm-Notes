@@ -4,7 +4,8 @@ const { getWeather } = require("../services/openWeatherApi");
 async function getTotalCount(req, res) {
   try {
     const result = await totalCount(req.query);
-    res.send(result);
+    res.status(result.statusCode || 200);
+    res.send(result.message || result);
   } catch (error) {
     res.status(400);
     res.send({
