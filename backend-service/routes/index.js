@@ -4,7 +4,7 @@ const { registerUser, loginUser, getCustomer, updateCustomer, resetPassword, cus
 const { validateToken, checkRole } = require('../controllers/customer');
 const { addFarmItem, getFarmItems, updateFarmItem, deleteFarmItem, getCategories } = require('./farmItem');
 const { addFarmItemActivities, getFarmItemActivities, updateFarmItemActivities, deleteFarmItemActivities } = require('./farmItemActivities');
-const { getTotalCount } = require('./admin')
+const { getTotalCount, getWeatherAPI } = require('./admin')
 
 router.post('/register', registerUser);
 router.post('/login', loginUser);
@@ -26,5 +26,6 @@ router.delete('/farmItemActivities/:id', validateToken, checkRole(['User']), del
 
 router.get('/users', validateToken, customerListing);
 router.get('/totalCount', validateToken, getTotalCount)
+router.get('/weather', getWeatherAPI);
 
 module.exports = router;

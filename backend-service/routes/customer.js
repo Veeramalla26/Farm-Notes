@@ -40,10 +40,9 @@ async function registerUser(req, res) {
             throw new Error(error.details[0].message);
         }
         const result = await register(data);
-        res.status(result.statusCode || 200);
-        res.send(result.message || result);
+        res.send(result);
     } catch (error) {
-        res.statusCode = 400;
+        res.status(400);
         res.send({
             error: error.message
         })
@@ -58,10 +57,9 @@ async function loginUser(req, res) {
             throw new Error(error.details[0].message);
         }
         const result = await login(data);
-        res.status(result.statusCode || 200);
-        res.send(result.message || result);
+        res.send(result);
     } catch (error) {
-        res.statusCode = 400;
+        res.status(400);
         res.send({
             error: error.message
         })
@@ -72,10 +70,9 @@ async function getCustomer(req, res) {
     try {
         const data = req.customerId;
         const result = await getUser(data);
-        res.status(result.statusCode || 200);
-        res.send(result.message || result);
+        res.send(result);
     } catch (error) {
-        res.statusCode = 400;
+        res.status(400);
         res.send({
             error: error.message
         })
@@ -90,10 +87,9 @@ async function updateCustomer(req, res) {
             throw new Error(error.details[0].message);
         }
         const result = await updateUser(data, req.customerId);
-        res.status(result.statusCode || 200);
-        res.send(result.message || result);
+        res.send(result);
     } catch (error) {
-        res.statusCode = 400;
+        res.status(400);
         res.send({
             error: error.message
         })
@@ -108,10 +104,9 @@ async function resetPassword(req, res) {
             throw new Error(error.details[0].message);
         }
         const result = await passwordReset(data.email, data.password, data.confirmPassword);
-        res.status(result.statusCode || 200);
-        res.send(result.message || result);
+        res.send(result);
     } catch (error) {
-        res.statusCode = 400;
+        res.status(400);
         res.send({
             error: error.message
         })
@@ -121,10 +116,9 @@ async function resetPassword(req, res) {
 async function customerListing(req, res) {
     try {
         const result = await listCustomers();
-        res.status(result.statusCode || 200);
-        res.send(result.message || result);
+        res.send(result);
     } catch (error) {
-        res.statusCode = 400;
+        res.status(400);
         res.send({
             error: error.message
         })
