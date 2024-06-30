@@ -1,4 +1,5 @@
 const models = require('../models');
+const logger = require("../services/logger");
 
 async function createFarmItem(data, customerId) {
     try {
