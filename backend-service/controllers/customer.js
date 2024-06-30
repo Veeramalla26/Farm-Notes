@@ -2,6 +2,7 @@ const models = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Op = require("sequelize").Op;
+const logger = require("../services/logger");
 
 async function register(data) {
   try {
