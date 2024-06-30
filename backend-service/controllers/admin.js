@@ -50,6 +50,7 @@ async function totalCount(data) {
       };
     });
 
+    logger.info(`Total count records fetched successfully`);
     return {
       totalFarmItems: farmItems.rows.length,
       totalfarmItemActivities:
@@ -57,7 +58,7 @@ async function totalCount(data) {
       response,
     };
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     throw error;
   }
 }

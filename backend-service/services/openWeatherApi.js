@@ -5,6 +5,7 @@ const BASE_URL = 'https://api.openweathermap.org/data/2.5/forecast';
 
 const getWeather = async (city) => {
   try {
+    city = city || 'Ireland'
     const response = await axios.get(BASE_URL, {
       params: {
         q: city,

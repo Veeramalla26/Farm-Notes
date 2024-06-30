@@ -13,6 +13,7 @@ async function createFarmItem(data, customerId) {
             ...data,
             customerId
         });
+        logger.info(`Farm Item created successfully`);
         return farmItem;
     } catch(error) {
         logger.error(error);
@@ -62,6 +63,7 @@ async function listFarmItems(data, customerId) {
             })
 
         })
+        logger.info(`Farm Items fetched successfully`);
         return {
             count: farmItems.count,
             rows: response,
@@ -79,6 +81,7 @@ async function editFarmItem(farmItemId, data, customerId) {
         const farmItemExists = await models.FarmItems.findOne({where: {id: farmItemId}});
         if(!farmItemExists) throw new Error('Farm Item not exists');
         await models.FarmItems.update(data, { where: { id: farmItemId } })
+        logger.info(`Farm Item updated successfully`);
         return {
             farmItemId,
             name: data.name
@@ -94,6 +97,7 @@ async function destroyFarmItem(farmItemId) {
         const farmItemExists = await models.FarmItems.findOne({where: {id: farmItemId}});
         if(!farmItemExists) throw new Error('Farm Item not exists');
         await models.FarmItems.destroy({ where: {id: farmItemId }});
+        logger.info(`Farm Item deleted successfully`);
         return {
             id: farmItemId
         }
@@ -106,6 +110,7 @@ async function destroyFarmItem(farmItemId) {
 async function listCategories() {
     try {
         const categories = await models.Category.findAll()
+        logger.info(`Fetched categories successfully`);
         return categories;
     } catch (error) {
         logger.error(error);

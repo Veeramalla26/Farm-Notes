@@ -14,6 +14,7 @@ async function createFarmItemActivities(data, customerId) {
             ...data,
             customerId
         });
+        logger.info(`Farm Item Activity created successfully`);
         return farmItemActivity;
     } catch(error) {
         logger.error(error);
@@ -65,6 +66,7 @@ async function listFarmItemActivities(data, customerId) {
             })
 
         })
+        logger.info(`Fetched Farm Item Activities successfully`);
         return {
             count: farmItemActivities.count,
             response
@@ -83,6 +85,7 @@ async function editFarmItemActivities(farmItemActivityId, data, customerId) {
         const farmItemActivityExists = await models.FarmItemActivities.findOne({where: {id: farmItemActivityId}});
         if(!farmItemActivityExists) throw new Error('Farm Item Activity not exists');
         await models.FarmItemActivities.update(data, { where: { id: farmItemActivityId } })
+        logger.info(`Farm Item Activity updated successfully`);
         return {
             farmItemActivityId,
             ...data
@@ -98,6 +101,7 @@ async function destroyFarmItemActivities(farmItemActivityId) {
         const farmItemActivityExists = await models.FarmItemActivities.findOne({where: {id: farmItemActivityId}});
         if(!farmItemActivityExists) throw new Error('Farm Item Activity not exists');
         await models.FarmItemActivities.destroy({ where: {id: farmItemActivityId }});
+        logger.info(`Farm Item Activity destroyed successfully`);
         return {
             id: farmItemActivityId
         }
