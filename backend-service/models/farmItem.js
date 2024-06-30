@@ -16,6 +16,9 @@ module.exports = (sequelize, DataTypes) => {
       FarmItems.belongsTo(models.Customer, {
         foreignKey: 'customerId'
       })
+      FarmItems.hasMany(models.FarmItemActivities, {
+        foreignKey: 'farmItemId'
+      })
     }
   }
   FarmItems.init({

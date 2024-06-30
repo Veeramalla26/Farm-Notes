@@ -35,10 +35,33 @@ async function listFarmItems(data, customerId) {
                 {
                     model: models.Category,
                     attributes: ['id', 'name']
+                },
+                {
+                    model: models.FarmItemActivities
                 }
             ]
         })
-        return farmItems;
+        let response = farmItems.rows.map(ele => {
+            let totalAmount = 0;
+            totalAmount = ele.FarmItemActivities.reduce((itemSum, activity) => {
+                return itemSum + parseFloat(activity.amount);
+            }, 0);
+            console.log(totalAmount)
+            return ({
+                id: ele.id,
+                name: ele.name,
+                itemCode: ele.itemCode,
+                species: ele.species,
+                dateOfBirth: ele.dateOfBirth,
+                healthStatus: ele.healthStatus,
+                feedingSchedule: ele.feedingSchedule,
+                Category: ele.Category,
+                totalActivitiesAmount: totalAmount,
+                FarmItemActivities: ele.FarmItemActivities
+            })
+
+        })
+        return response;
     } catch(error) {
         console.log(error);
         throw error;

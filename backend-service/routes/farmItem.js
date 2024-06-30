@@ -6,7 +6,7 @@ const addFarmItemSchema = Joi.object({
     categoryId: Joi.number().label('Category Id').required(),
     itemCode: Joi.string().required(),
     species: Joi.string().allow(null),
-    date: Joi.date().allow(null),
+    dateOfBirth: Joi.date().allow(null),
     healthStatus: Joi.string().allow(null),
     feedingSchedule: Joi.string().allow(null)
 });
