@@ -1,6 +1,6 @@
 .modal-content {
     width: 100%;
-    max-width: 900px; // Increased the max-width
+    max-width: 900px;
     margin: auto;
     padding: 2em;
     border-radius: 10px;
@@ -23,7 +23,7 @@
 
 .modal-body {
     padding: 0;
-    max-height: 500px; // Adjusted to make use of the increased modal size
+    max-height: 500px;
     overflow-y: auto;
 }
 
@@ -48,8 +48,8 @@
 }
 
 .form-control:focus {
-    border-color: #1f7f19; // Green color for focused fields
-    box-shadow: 0 0 5px rgba(31, 127, 25, 0.5); // Green shadow for focused fields
+    border-color: #1f7f19;
+    box-shadow: 0 0 5px rgba(31, 127, 25, 0.5);
 }
 
 .form-control.is-invalid {
@@ -86,8 +86,8 @@ select.form-control {
 }
 
 select.form-control:focus {
-    border-color: #1f7f19; // Green color for focused fields
-    box-shadow: 0 0 5px rgba(31, 127, 25, 0.5); // Green shadow for focused fields
+    border-color: #1f7f19;
+    box-shadow: 0 0 5px rgba(31, 127, 25, 0.5);
 }
 
 select.form-control option {

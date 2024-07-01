@@ -7,7 +7,6 @@ const DoughnutChart = ({ number, maxNumber, title }) => {
   let chartInstance = null;
 
   useEffect(() => {
-    // Destroy previous chart instance before creating a new one
     if (chartInstance) {
       chartInstance.destroy();
     }
@@ -22,13 +21,13 @@ const DoughnutChart = ({ number, maxNumber, title }) => {
         datasets: [
           {
             data: [percentage, 100 - percentage],
-            backgroundColor: ["#4CAF50", "#E5E5E5"], // Green color for filled part and light gray for remaining
-            hoverBackgroundColor: ["#4CAF50", "#E5E5E5"], // Hover color for filled part
+            backgroundColor: ["#4CAF50", "#E5E5E5"],
+            hoverBackgroundColor: ["#4CAF50", "#E5E5E5"],
           },
         ],
       },
       options: {
-        cutout: "80%", // Adjust this value to change the size of the doughnut hole
+        cutout: "80%",
         plugins: {
           legend: {
             display: false,
@@ -37,18 +36,17 @@ const DoughnutChart = ({ number, maxNumber, title }) => {
       },
     });
 
-    // Cleanup function to destroy chart instance when component unmounts
     return () => {
       if (chartInstance) {
         chartInstance.destroy();
       }
     };
-  }, [number, maxNumber]); // Ensure chart updates when 'number' or 'maxNumber' props change
+  }, [number, maxNumber]);
 
   return (
-    <Card sx={{ maxWidth: 1000, width: 400, boxShadow: 4 }}>
+    <Card sx={{ maxWidth: 1000, width: 200, margin: 2, boxShadow: 4 }}>
       <CardContent>
-        <Typography variant="h5" sx={{ color: "#4CAF50", marginBottom: 2 }}>
+        <Typography variant="h7" sx={{ color: "#4CAF50", marginBottom: 2 }}>
           {title}
         </Typography>
         <Box sx={{ position: "relative", textAlign: "center" }}>

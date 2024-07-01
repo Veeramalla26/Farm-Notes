@@ -11,7 +11,10 @@ import {
   FaBuilding,
   FaBox,
   FaUser,
-} from "react-icons/fa"; // Import icons from react-icons
+  FaCloud,
+  FaPagelines,
+} from "react-icons/fa";
+import { GiWheat } from "react-icons/gi";
 
 const AdminSidebar = () => (
   <div className="sidebar">
@@ -36,6 +39,15 @@ const AdminSidebar = () => (
       </li>
       <li>
         <NavLink
+          to="/dashboard/weather"
+          activeClassName="active"
+          className="sidebar-link"
+        >
+          <FaCloud className="sidebar-icon" /> Weather
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to="/dashboard/animals"
           activeClassName="active"
           className="sidebar-link"
@@ -49,7 +61,7 @@ const AdminSidebar = () => (
           activeClassName="active"
           className="sidebar-link"
         >
-          <FaLeaf className="sidebar-icon" /> Crops
+          <GiWheat className="sidebar-icon" /> Crops
         </NavLink>
       </li>
       <li>
@@ -85,7 +97,7 @@ const AdminSidebar = () => (
           activeClassName="active"
           className="sidebar-link"
         >
-          <FaTractor className="sidebar-icon" /> Machinery
+          <FaPagelines className="sidebar-icon" /> Plants
         </NavLink>
       </li>
       <li>
@@ -94,16 +106,8 @@ const AdminSidebar = () => (
           activeClassName="active"
           className="sidebar-link"
         >
-          <FaBuilding className="sidebar-icon" /> Infrastructure
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/dashboard/supplies"
-          activeClassName="active"
-          className="sidebar-link"
-        >
-          <FaBox className="sidebar-icon" /> Supplies
+          <FaBuilding className="sidebar-icon" />
+          Others
         </NavLink>
       </li>
     </ul>

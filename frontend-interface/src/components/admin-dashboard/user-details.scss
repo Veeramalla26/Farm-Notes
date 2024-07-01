@@ -19,10 +19,11 @@
     }
     .circle-cards {
         display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        height: 80vh;
-        align-items: center;
+        flex-direction: column;
+        // justify-content: space-evenly;
+        justify-content: flex-start;
+        height: 150vh;
+        // align-items: center;
     }
     .card-container {
         display: flex;
@@ -58,7 +59,6 @@
         color: #000;
         flex: 4;
         flex-wrap: wrap;
-        // margin-right: 10px;
     }
     .user-detail .value {
         color: #555;

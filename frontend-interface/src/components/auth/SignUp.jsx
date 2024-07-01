@@ -39,7 +39,6 @@ const SignUp = () => {
         confirmPassword,
       });
       console.log("user->", userData);
-      // Handle successful signup, e.g., navigate to login or dashboard
       navigate("/login");
     } catch (error) {
       console.error("Error signing up:", error);

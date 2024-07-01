@@ -42,8 +42,6 @@ const EditProfileModal = ({ show, handleClose, profile, handleSave }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    // Numeric-only validation for pinCode
     if (name === "pinCode") {
       if (value.trim() === "" || /^\d+$/.test(value)) {
         setErrors((prevErrors) => ({
@@ -76,8 +74,6 @@ const EditProfileModal = ({ show, handleClose, profile, handleSave }) => {
     if (!formData.phoneNumber)
       newErrors.phoneNumber = "Phone Number is required";
     if (!formData.address) newErrors.address = "Address is required";
-
-    // Pin code validation
     if (!formData.pinCode) {
       newErrors.pinCode = "Zip code is required";
     } else if (!/^\d+$/.test(formData.pinCode)) {

@@ -6,8 +6,8 @@ import { deleteFarmItem } from "../../serviceApis/loginapi";
 const DeleteModal = ({ show, handleClose, selectedItem, fetchItems }) => {
   const handleConfirmDelete = async () => {
     try {
-      await deleteFarmItem(selectedItem.id); // Assuming selectedItem has an 'id' property
-      fetchItems(); // Refresh items after deletion
+      await deleteFarmItem(selectedItem.id);
+      fetchItems();
       handleClose();
     } catch (error) {
       console.error("Error deleting item:", error);

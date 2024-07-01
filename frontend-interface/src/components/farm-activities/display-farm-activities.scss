@@ -63,7 +63,7 @@
         }
     }
     .activity-list-container {
-        max-height: 400px; // Adjust as needed
+        max-height: 400px;
         overflow-y: auto;
         padding: 0.5rem;
         border: 1px solid #ddd;
@@ -76,7 +76,7 @@
     }
     .activity-card {
         margin: 1rem;
-        width: calc(33% - 2rem); // Adjust width as necessary
+        width: calc(33% - 2rem);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         transition: box-shadow 0.3s;
         &:hover {
@@ -97,13 +97,13 @@
                 transition: background-color 0.3s;
             }
             .edit-button {
-                background-color: #1f7f19; // Green for edit
+                background-color: #1f7f19;
                 &:hover {
                     background-color: #1f7f19;
                 }
             }
             .delete-button {
-                background-color: #dc3545; // Red for delete
+                background-color: #dc3545;
                 &:hover {
                     background-color: #c82333;
                 }

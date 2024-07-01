@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Button, Container, Table, Spinner, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { FaArrowLeft, FaEdit, FaTrashAlt, FaSync } from "react-icons/fa";
+import { FaEdit, FaTrashAlt, FaSync } from "react-icons/fa";
 import DeleteModal from "./farm-items-delete-modal";
 import EditModal from "./farm-items-edit-modal";
 import "./farm-items-display.scss";
-import { getCategories, getFarmItems } from "../../serviceApis/loginapi";
+import { getFarmItems } from "../../serviceApis/loginapi";
 
 const ItemList = ({ id }) => {
   const [items, setItems] = useState({ rows: [], count: 0 });
-  const [categories, setCategories] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [loading, setLoading] = useState(true); // Loading state
-  const [error, setError] = useState(null); // Error state
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,20 +22,20 @@ const ItemList = ({ id }) => {
 
   const fetchItems = async () => {
     try {
-      setLoading(true); // Start loading
-      setError(null); // Clear previous errors
+      setLoading(true);
+      setError(null);
       const response = await getFarmItems({ categoryId: id });
       setItems(response);
-      setLoading(false); // Stop loading
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching items:", error);
       setError("Error fetching items. Please try again later.");
-      setLoading(false); // Stop loading
+      setLoading(false);
     }
   };
 
   const handleViewClick = (item) => {
-    navigate(`/activities`, { state: { item } }); // Navigate to FarmActivities with item details
+    navigate(`/activities`, { state: { item } });
   };
 
   const handleDeleteClick = (item) => {
@@ -89,6 +88,7 @@ const ItemList = ({ id }) => {
               <th>Date Of Birth</th>
               <th>Health Status</th>
               <th>Feeding Schedule</th>
+              <th>Total Activities Cost</th> {/* New column for Cost Spends */}
               <th>Actions</th>
               <th>View</th>
             </tr>
@@ -96,13 +96,13 @@ const ItemList = ({ id }) => {
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan="9" className="loading-spinner">
+                <td colSpan="10" className="loading-spinner">
                   <Spinner animation="border" />
                 </td>
               </tr>
             ) : error ? (
               <tr>
-                <td colSpan="9">
+                <td colSpan="10">
                   <Alert variant="danger" className="error-message">
                     {error}
                   </Alert>
@@ -110,7 +110,7 @@ const ItemList = ({ id }) => {
               </tr>
             ) : items?.rows?.length === 0 ? (
               <tr>
-                <td colSpan="9" className="no-records-found">
+                <td colSpan="10" className="no-records-found">
                   No records found
                 </td>
               </tr>
@@ -126,12 +126,14 @@ const ItemList = ({ id }) => {
                   </td>
                   <td>{item.healthStatus || "-"}</td>
                   <td>{item.feedingSchedule || "-"}</td>
+                  <td>{item.totalActivitiesAmount || "-"}</td>{" "}
+                  {/* Displaying Cost Spends */}
                   <td className="actions-column">
                     <Button
                       variant="link"
                       onClick={() => handleEditClick(item)}
                       className="action-button"
-                      style={{ color: "grey" }}
+                      style={{ color: "grey", margin: 0 }}
                     >
                       <FaEdit />
                     </Button>
@@ -139,7 +141,7 @@ const ItemList = ({ id }) => {
                       variant="link"
                       onClick={() => handleDeleteClick(item)}
                       className="action-button"
-                      style={{ color: "red" }}
+                      style={{ color: "red", margin: 0 }}
                     >
                       <FaTrashAlt />
                     </Button>
@@ -149,7 +151,7 @@ const ItemList = ({ id }) => {
                       variant="link"
                       onClick={() => handleViewClick(item)}
                       className="action-button"
-                      style={{ color: "green" }}
+                      style={{ color: "green", margin: "0" }}
                     >
                       View
                     </Button>
