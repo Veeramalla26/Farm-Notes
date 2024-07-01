@@ -36,19 +36,13 @@ module.exports = {
       },
       {
         id: 6,
-        name: 'Machinery',
+        name: 'Plants',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         id: 7,
-        name: 'Infrastructure',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        id: 8,
-        name: 'Supplies',
+        name: 'Others',
         createdAt: new Date(),
         updatedAt: new Date()
       }
