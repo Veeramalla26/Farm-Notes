@@ -110,13 +110,11 @@ button.add-activity-button:hover {
 .react-datepicker__year-text,
 .react-datepicker__current-month {
     color: #fff;
-    /* White color */
 }
 
 .react-datepicker__current-month,
 .react-datepicker__day-name {
     color: #fff;
-    /* White color */
 }
 
 .react-datepicker__day:hover {
@@ -137,12 +135,8 @@ button.add-activity-button:hover {
     color: white;
 }
 
-
-/* Ensure this is the correct class name */
-
 .react-datepicker__day--selected {
     background-color: #1f7f19 !important;
-    /* Ensure !important is used to override any inline styles */
     color: white !important;
 }
 

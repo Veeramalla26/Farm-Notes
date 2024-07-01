@@ -3,23 +3,23 @@ import { Modal, Button, Form, Alert } from "react-bootstrap";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "../add-item-modal/add-item-modal.scss"; // Make sure your SCSS file is correctly importing
+import "../add-item-modal/add-item-modal.scss";
 
 import { getCategories } from "../../serviceApis/loginapi";
 
 const AddActivityModal = ({ show, handleClose, handleAddActivity, item }) => {
   const [categories, setCategories] = useState([]);
-  const [name, setName] = useState(""); // Prefill with itemName if available
+  const [name, setName] = useState("");
   const [farmItemId, setFarmItemId] = useState(item?.id || "");
   const [itemCode, setItemCode] = useState(item?.itemCode);
   const [lastFarmActivityDate, setLastFarmActivityDate] = useState(
     getTodayDate()
   );
-  const [nextFarmActivityDate, setNextFarmActivityDate] = useState(null); // Using null initially for DatePicker
+  const [nextFarmActivityDate, setNextFarmActivityDate] = useState(null);
+  const [activityCost, setActivityCost] = useState("");
   const [notes, setNotes] = useState("");
   const [showErrors, setShowErrors] = useState(false);
 
-  // Function to get today's date in 'YYYY-MM-DD' format
   function getTodayDate() {
     const today = new Date();
     const year = today.getFullYear();
@@ -44,7 +44,7 @@ const AddActivityModal = ({ show, handleClose, handleAddActivity, item }) => {
   }, []);
 
   const handleSubmit = () => {
-    if (!name || !farmItemId || !nextFarmActivityDate) {
+    if (!name || !farmItemId || !nextFarmActivityDate || !activityCost) {
       setShowErrors(true);
     } else {
       handleAddActivity({
@@ -52,28 +52,25 @@ const AddActivityModal = ({ show, handleClose, handleAddActivity, item }) => {
         farmItemId,
         lastFarmActivityDate,
         nextFarmActivityDate: nextFarmActivityDate || undefined,
+        amount: activityCost,
         notes: notes || undefined,
       });
 
       handleClose();
-      // Reset form fields
       setName("");
-
       setLastFarmActivityDate(getTodayDate());
-      setNextFarmActivityDate(null); // Reset DatePicker to initial state
-
+      setNextFarmActivityDate(null);
+      setActivityCost("");
       setNotes("");
       setShowErrors(false);
     }
   };
 
   const handleModalClose = () => {
-    // Reset form fields and error state
     setName("");
-
     setLastFarmActivityDate(getTodayDate());
-    setNextFarmActivityDate(null); // Reset DatePicker to initial state
-
+    setNextFarmActivityDate(null);
+    setActivityCost("");
     setNotes("");
     setShowErrors(false);
     handleClose();
@@ -104,7 +101,7 @@ const AddActivityModal = ({ show, handleClose, handleAddActivity, item }) => {
               />
               {showErrors && !name && (
                 <Form.Text className="text-danger">
-                  Item Name is required
+                  Activity Name is required
                 </Form.Text>
               )}
             </Form.Group>
@@ -117,7 +114,7 @@ const AddActivityModal = ({ show, handleClose, handleAddActivity, item }) => {
                 className={`form-control ${
                   showErrors && !itemCode && "is-invalid"
                 }`}
-                disabled // Disable editing since it's received from navigation
+                disabled
                 required
               />
               {showErrors && !itemCode && (
@@ -157,7 +154,28 @@ const AddActivityModal = ({ show, handleClose, handleAddActivity, item }) => {
               />
               {showErrors && !nextFarmActivityDate && (
                 <Form.Text className="text-danger">
-                  Next Farm Activity Date is required
+                  Farm Activity Date is required
+                </Form.Text>
+              )}
+            </Form.Group>
+          </div>
+
+          <div className="form-group">
+            <Form.Group controlId="activityCost" className="">
+              <Form.Label>Activity Cost</Form.Label>
+              <Form.Control
+                type="number"
+                value={activityCost}
+                onChange={(e) => setActivityCost(e.target.value)}
+                className={`form-control ${
+                  showErrors && !activityCost && "is-invalid"
+                }`}
+                required
+                placeholder="Enter Activity Cost"
+              />
+              {showErrors && !activityCost && (
+                <Form.Text className="text-danger">
+                  Activity Cost is required
                 </Form.Text>
               )}
             </Form.Group>

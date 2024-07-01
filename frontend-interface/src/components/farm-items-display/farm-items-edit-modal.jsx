@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Button, Form, Alert } from "react-bootstrap";
 import { getCategories, putEditItem } from "../../serviceApis/loginapi";
-import "./farm-items-edit-modal.scss"; // Ensure to define your CSS styles here
+import "./farm-items-edit-modal.scss";
 
 const EditModal = ({
   show,
@@ -66,7 +66,6 @@ const EditModal = ({
     if (!editName) newErrors.name = "Name is required";
     if (!editCategory) newErrors.category = "Category is required";
     if (!editItemCode) newErrors.itemCode = "Item Code is required";
-    // Add validation for other required fields here if needed
     return newErrors;
   };
 

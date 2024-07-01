@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import "react-datepicker/dist/react-datepicker.css";
-import "../add-item-modal/add-item-modal.scss"; // Make sure your SCSS file is correctly importing
+import "../add-item-modal/add-item-modal.scss";
 
 const EditActivityModal = ({
   show,
@@ -14,6 +14,7 @@ const EditActivityModal = ({
   const [itemCode, setItemCode] = useState("");
   const [lastFarmActivityDate, setLastFarmActivityDate] = useState("");
   const [nextFarmActivityDate, setNextFarmActivityDate] = useState("");
+  const [activityCost, setActivityCost] = useState("");
   const [notes, setNotes] = useState("");
   const [showErrors, setShowErrors] = useState(false);
 
@@ -24,8 +25,9 @@ const EditActivityModal = ({
       setItemCode(activity.FarmItem?.itemCode);
       setLastFarmActivityDate(formatDate(activity.lastFarmActivityDate));
       setNextFarmActivityDate(formatDate(activity.nextFarmActivityDate));
+      setActivityCost(activity.amount);
       setNotes(activity.notes);
-      setShowErrors(false); // Reset errors on modal open
+      setShowErrors(false);
     }
   }, [show, activity]);
 
@@ -51,13 +53,14 @@ const EditActivityModal = ({
   }
 
   const handleSubmit = () => {
-    if (!name || !farmItemId || !nextFarmActivityDate) {
+    if (!name || !farmItemId || !nextFarmActivityDate || !activityCost) {
       setShowErrors(true);
     } else {
       handleEditActivity(activity.id, {
         name,
         lastFarmActivityDate,
         nextFarmActivityDate: nextFarmActivityDate || undefined,
+        amount: activityCost,
         notes: notes || undefined,
       });
       handleClose();
@@ -76,6 +79,7 @@ const EditActivityModal = ({
     setItemCode("");
     setLastFarmActivityDate("");
     setNextFarmActivityDate("");
+    setActivityCost("");
     setNotes("");
     setShowErrors(false);
   };
@@ -105,7 +109,7 @@ const EditActivityModal = ({
               />
               {showErrors && !name && (
                 <Form.Text className="text-danger">
-                  Item Name is required
+                  Activity Name is required
                 </Form.Text>
               )}
             </Form.Group>
@@ -118,7 +122,7 @@ const EditActivityModal = ({
                 className={`form-control ${
                   showErrors && !itemCode && "is-invalid"
                 }`}
-                disabled // Disable editing since it's received from navigation
+                disabled
                 required
               />
               {showErrors && !itemCode && (
@@ -163,6 +167,30 @@ const EditActivityModal = ({
               {showErrors && !nextFarmActivityDate && (
                 <Form.Text className="text-danger">
                   Next Farm Activity Date is required
+                </Form.Text>
+              )}
+            </Form.Group>
+          </div>
+
+          <div className="form-group">
+            <Form.Group
+              controlId="activityCost"
+              className="form-group half-width"
+            >
+              <Form.Label>Activity Cost</Form.Label>
+              <Form.Control
+                type="number"
+                value={activityCost}
+                onChange={(e) => setActivityCost(e.target.value)}
+                className={`form-control ${
+                  showErrors && !activityCost && "is-invalid"
+                }`}
+                required
+                placeholder="Enter Activity Cost"
+              />
+              {showErrors && !activityCost && (
+                <Form.Text className="text-danger">
+                  Activity Cost is required
                 </Form.Text>
               )}
             </Form.Group>

@@ -16,19 +16,20 @@ import {
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
-import { FaPlus, FaUser, FaLock, FaSignOutAlt } from "react-icons/fa"; // Import icons
+import { FaPlus, FaUser, FaLock, FaSignOutAlt } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./dashboard.scss";
-import FarmNotesLogo from "../../assets/FarmNotes.png"; // Adjust the path as needed
+import FarmNotesLogo from "../../assets/FarmNotes.png";
 import Sidebar from "../../components/sidebar";
 import ItemList from "../../components/farm-items-display/farm-items-display";
-import AddItemModal from "../../components/add-item-modal/add-item-modal"; // Adjust the path as needed
+import AddItemModal from "../../components/add-item-modal/add-item-modal";
 import EditProfileModal from "../../components/edit-profile.modal";
 import ResetPasswordModal from "../../components/reset-password";
 import AdminSidebar from "../../components/admin-sidebar";
 import UserDetails from "../../components/admin-dashboard/user-details-listing";
 import DoughnutChart from "../../components/doughtnut-chart";
 import ShowAdminItemsActivities from "../../components/admin-dashboard/show-admin-items-activities";
+import WeatherReport from "../../components/weather-report";
 
 const Dashboard = () => {
   const { logout } = useAuth();
@@ -78,7 +79,7 @@ const Dashboard = () => {
   const handleSaveProfile = async (profileData) => {
     try {
       const response = await putEditProfile({
-        userName: profileData.userName, // Corrected typo here
+        userName: profileData.userName,
         phoneNumber: profileData.phoneNumber,
         dateOfBirth: profileData.dateOfBirth,
         address: profileData.address,
@@ -87,7 +88,7 @@ const Dashboard = () => {
       });
       console.log(response);
       // handleOffcanvasClose();
-      await handleProfile(); // Fetch the updated profile data
+      await handleProfile();
       setShowProfileModal(false);
     } catch (error) {
       console.error("Error updating profile:", error);
@@ -222,6 +223,7 @@ const Dashboard = () => {
               <Routes>
                 <Route index element={<Navigate to="items" />} />
                 <Route path="items" element={<ItemList />} />
+                <Route path="weather" element={<WeatherReport />} />
                 <Route
                   path="animals"
                   element={<ItemList id="1" key="animals" />}
@@ -258,6 +260,7 @@ const Dashboard = () => {
               <Routes>
                 <Route index element={<Navigate to="userDetails" />} />
                 <Route path="userDetails" element={<UserDetails />} />
+                <Route path="weather" element={<WeatherReport />} />
                 <Route path="allCount" element={<ShowAdminItemsActivities />} />
                 <Route
                   path="animals"

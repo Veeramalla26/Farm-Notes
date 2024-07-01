@@ -30,6 +30,17 @@ export const getProfile = async () => {
     throw error;
   }
 };
+export const getWeather = async (city) => {
+  try {
+    const response = await axiosInstance.get("/weather", {
+      params: city,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error;
+  }
+};
 
 export const getCategories = async () => {
   try {
@@ -46,6 +57,17 @@ export const getUserDetails = async () => {
     return response.data;
   } catch (error) {
     console.error("Error fetching user data:", error);
+    throw error;
+  }
+};
+export const getTotalCountDetails = async (id) => {
+  try {
+    const response = await axiosInstance.get("/totalCount", {
+      params: id,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching farm items:", error);
     throw error;
   }
 };

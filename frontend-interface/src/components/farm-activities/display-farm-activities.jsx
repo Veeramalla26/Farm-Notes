@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Card, Row, Col, Spinner, Alert } from "react-bootstrap";
-import { FaArrowLeft } from "react-icons/fa"; // Import the arrow icon
+import { FaArrowLeft } from "react-icons/fa";
 import "./display-farm-activities.scss";
 import {
   deleteFarmActivity,
@@ -10,12 +10,12 @@ import {
   putEditFarmActivity,
 } from "../../serviceApis/loginapi";
 import AddActivityModal from "./add-farm-activities";
-import EditActivityModal from "./edit-farm-activities"; // Import the EditActivityModal component
-import DeleteModal from "./delete-farm-activities"; // Import the DeleteModal component
+import EditActivityModal from "./edit-farm-activities";
+import DeleteModal from "./delete-farm-activities";
 
 const FarmActivities = () => {
   const location = useLocation();
-  const navigate = useNavigate(); // Initialize the navigate function
+  const navigate = useNavigate();
   const [items, setItems] = useState({ rows: [], count: 0 });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -83,9 +83,10 @@ const FarmActivities = () => {
     }
   };
 
-  const handleEditActivity = async (data) => {
+  const handleEditActivity = async (id, data) => {
     try {
-      const response = await putEditFarmActivity(selectedActivity.id, data);
+      console.log("data", data);
+      const response = await putEditFarmActivity(id, data);
       console.log(response);
       setShowEditActivityModal(false);
       fetchItems();
@@ -238,6 +239,9 @@ const FarmActivities = () => {
                   </Card.Text>
                   <Card.Text>
                     <label>Notes:</label> <span>{activity.notes || "-"}</span>
+                  </Card.Text>
+                  <Card.Text>
+                    <label>Cost:</label> <span>{activity.amount || "-"}</span>
                   </Card.Text>
                   <div className="activity-actions">
                     <Button

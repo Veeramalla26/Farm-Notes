@@ -26,6 +26,14 @@ const UserDetails = () => {
     }
   };
 
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    return `${dateString.substr(8, 2)}/${dateString.substr(
+      5,
+      2
+    )}/${dateString.substr(0, 4)}`;
+  };
+
   return (
     <Container className="user-details">
       <h2 className="header">
@@ -46,20 +54,20 @@ const UserDetails = () => {
           {users?.result?.map((user) => (
             <Card className="user-card" key={user.id}>
               <Card.Body>
-                <Card.Title className="card-title">
-                  {user?.name?.trim()}
-                </Card.Title>
                 <div className="user-detail">
-                  <span className="label">Role:</span>
-                  <span className="value">{user.role || "-"}</span>
+                  <span className="label">User Name:</span>
+                  <span className="value">{user?.userName?.trim() || "-"}</span>
                 </div>
+
                 <div className="user-detail">
                   <span className="label">Email:</span>
                   <span className="value">{user.email || "-"}</span>
                 </div>
                 <div className="user-detail">
                   <span className="label">Date of Birth:</span>
-                  <span className="value">{user.dob || "-"}</span>
+                  <span className="value">
+                    {formatDate(user.dateOfBirth) || "-"}
+                  </span>
                 </div>
                 <div className="user-detail">
                   <span className="label">Country:</span>
@@ -71,11 +79,21 @@ const UserDetails = () => {
                 </div>
                 <div className="user-detail">
                   <span className="label">Zip Code:</span>
-                  <span className="value">{user.pincode || "-"}</span>
+                  <span className="value">{user.pinCode || "-"}</span>
                 </div>
                 <div className="user-detail">
                   <span className="label">Phone Number:</span>
                   <span className="value">{user.phoneNumber || "-"}</span>
+                </div>
+                <div className="user-detail">
+                  <span className="label">Farm Items:</span>
+                  <span className="value">{user.FarmItems || "-"}</span>
+                </div>
+                <div className="user-detail">
+                  <span className="label">Farm Item Activities:</span>
+                  <span className="value">
+                    {user.FarmItemActivities || "-"}
+                  </span>
                 </div>
               </Card.Body>
             </Card>

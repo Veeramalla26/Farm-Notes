@@ -32,7 +32,6 @@ const AddItemModal = ({ show, handleClose, handleAddItem }) => {
     if (!name) newErrors.name = "Name is required";
     if (!category) newErrors.category = "Category is required";
     if (!itemCode) newErrors.itemCode = "Item Code is required";
-    // Add validation for other required fields here if needed
     return newErrors;
   };
 
