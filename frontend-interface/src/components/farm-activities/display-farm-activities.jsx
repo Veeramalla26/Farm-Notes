@@ -24,6 +24,7 @@ const FarmActivities = () => {
   const [showEditActivityModal, setShowEditActivityModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedActivity, setSelectedActivity] = useState(null);
+  console.log("idd", item);
 
   useEffect(() => {
     fetchItems();
@@ -34,7 +35,7 @@ const FarmActivities = () => {
       setLoading(true);
       setError(null);
       const response = await getFarmItemActivities({
-        categoryId: item?.categoryId,
+        farmItemId: item?.id,
       });
       setItems(response);
       setLoading(false);
@@ -178,7 +179,7 @@ const FarmActivities = () => {
             className="button-add-activity"
             onClick={handleAddActivityClick}
           >
-            Add Activities
+            Add Activity
           </Button>
         </div>
       </div>

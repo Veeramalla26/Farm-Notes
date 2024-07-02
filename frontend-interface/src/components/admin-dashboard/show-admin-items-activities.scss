@@ -17,7 +17,6 @@
         margin-top: 20px;
         overflow-y: scroll;
         height: 95vh;
-        /* Prevent horizontal scroll on the wrapper */
     }
     .circle-cards {
         display: flex;
@@ -25,9 +24,7 @@
         gap: 20px;
         align-items: center;
         overflow-x: auto;
-        /* Enable horizontal scrolling if needed */
         margin-bottom: 20px;
-        /* Add margin between charts and table */
     }
     .chart-wrapper {
         margin-bottom: 20px;
@@ -45,9 +42,7 @@
         overflow-y: scroll;
         margin-top: 20px;
         margin-bottom: 20px;
-        /* Add margin between charts and table */
         max-width: 100%;
-        /* Ensure table doesn't overflow horizontally */
     }
     .error-message {
         text-align: center;
@@ -87,8 +82,6 @@
     }
     .scrollable-body {
         overflow-y: auto;
-        /* Enable vertical scrolling for tbody */
         max-height: 400px;
-        /* Set a max-height for tbody to enable scrolling */
     }
 }
