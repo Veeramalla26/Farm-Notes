@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Button, Form, Alert } from "react-bootstrap";
+import { Modal, Button, Form } from "react-bootstrap";
 import { getCategories, putEditItem } from "../../serviceApis/loginapi";
 import "./farm-items-edit-modal.scss";
 
@@ -20,13 +20,7 @@ const EditModal = ({
   const [editHealthStatus, setEditHealthStatus] = useState("");
   const [editFeedingSchedule, setEditFeedingSchedule] = useState("");
   const [errors, setErrors] = useState({});
-  const formatDate = (dateString) => {
-    if (!dateString) return "";
-    return `${dateString.substr(8, 2)}/${dateString.substr(
-      5,
-      2
-    )}/${dateString.substr(0, 4)}`;
-  };
+
   const formatDateToInput = (dateString) => {
     if (!dateString) return "";
     const date = new Date(dateString);

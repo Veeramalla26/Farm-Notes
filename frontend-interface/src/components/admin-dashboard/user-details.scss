@@ -1,4 +1,3 @@
-// user-details.scss
 .user-details {
     .header {
         margin: 20px;
@@ -20,10 +19,8 @@
     .circle-cards {
         display: flex;
         flex-direction: column;
-        // justify-content: space-evenly;
         justify-content: flex-start;
         height: 150vh;
-        // align-items: center;
     }
     .card-container {
         display: flex;
@@ -31,7 +28,6 @@
         gap: 20px;
         justify-content: space-evenly;
         max-height: 80vh;
-        /* Adjust this value as needed */
         overflow-y: auto;
         padding: 2px;
     }

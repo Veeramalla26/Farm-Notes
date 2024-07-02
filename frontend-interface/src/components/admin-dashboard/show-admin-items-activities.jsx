@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Spinner, Table } from "react-bootstrap";
-import "./show-admin-items-activities.scss"; // Corrected typo in import
+import "./show-admin-items-activities.scss";
 import { getTotalCountDetails } from "../../serviceApis/loginapi";
 import DoughnutChart from "../doughtnut-chart";
 
@@ -28,8 +28,7 @@ const ShowAdminItemsActivities = ({ id, name }) => {
   };
 
   const calculateDoughnutChartWidth = () => {
-    // Adjusting the width of DoughnutChart based on the length of 'name'
-    return name ? `${name.length * 10}px` : "200px"; // Adjust multiplier as needed
+    return name ? `${name.length * 10}px` : "200px";
   };
 
   const formatDate = (dateString) => {
@@ -48,24 +47,28 @@ const ShowAdminItemsActivities = ({ id, name }) => {
         </div>
       ) : (
         <div className="content-wrapper">
-          <div className="circle-cards">
-            <div className="chart-wrapper">
-              <DoughnutChart
-                number={items?.totalFarmItems || 0}
-                maxNumber={100}
-                title={name ? `Farm Items of ${name}` : "Farm Items"}
-                style={{ width: calculateDoughnutChartWidth() }}
-              />
+          {items?.response?.length > 0 && (
+            <div className="circle-cards">
+              <div className="chart-wrapper">
+                <DoughnutChart
+                  number={items?.totalFarmItems || 0}
+                  maxNumber={100}
+                  title={name ? `Farm Items of ${name}` : "Farm Items"}
+                  style={{ width: calculateDoughnutChartWidth() }}
+                />
+              </div>
+              <div className="chart-wrapper">
+                <DoughnutChart
+                  number={items?.totalfarmItemActivities || 0}
+                  maxNumber={100}
+                  title={
+                    name ? `Farm Activities of ${name}` : "Farm Activities"
+                  }
+                  style={{ width: calculateDoughnutChartWidth() }}
+                />
+              </div>
             </div>
-            <div className="chart-wrapper">
-              <DoughnutChart
-                number={items?.totalfarmItemActivities || 0}
-                maxNumber={100}
-                title={name ? `Farm Activities of ${name}` : "Farm Activities"}
-                style={{ width: calculateDoughnutChartWidth() }}
-              />
-            </div>
-          </div>
+          )}
           <div className="table-container">
             {error && (
               <div className="error-message">

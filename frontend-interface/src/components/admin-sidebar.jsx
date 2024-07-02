@@ -3,13 +3,10 @@ import { NavLink } from "react-router-dom";
 import {
   FaHome,
   FaDog,
-  FaLeaf,
   FaFish,
   FaCrow,
   FaCat,
-  FaTractor,
   FaBuilding,
-  FaBox,
   FaUser,
   FaCloud,
   FaPagelines,

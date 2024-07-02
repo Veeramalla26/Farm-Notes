@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
 
 const PrivateRoute = ({ children }) => {
-  const { isAuthenticated, login } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   console.log("private auth->", isAuthenticated);
 

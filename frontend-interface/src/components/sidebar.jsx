@@ -3,16 +3,12 @@ import { NavLink } from "react-router-dom";
 import {
   FaHome,
   FaDog,
-  FaLeaf,
   FaFish,
   FaCrow,
   FaCat,
-  FaTractor,
   FaBuilding,
-  FaBox,
   FaCloud,
   FaPagelines,
-  FaTint,
 } from "react-icons/fa";
 import { GiWheat } from "react-icons/gi";
 

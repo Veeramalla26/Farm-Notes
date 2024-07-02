@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
 
 const PublicRoute = ({ children }) => {
-  const { isAuthenticated, login } = useAuth();
+  const { isAuthenticated } = useAuth();
   console.log("isAut123h->", isAuthenticated);
   return isAuthenticated ? <Navigate to="/dashboard" /> : children;
 };

@@ -36,7 +36,7 @@ const WeatherReport = () => {
   };
 
   useEffect(() => {
-    fetchWeather("Ireland"); // Default city on load
+    fetchWeather("Ireland");
   }, []);
 
   return (

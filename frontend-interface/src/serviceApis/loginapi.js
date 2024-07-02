@@ -92,10 +92,11 @@ export const getFarmItems = async (id) => {
     throw error;
   }
 };
-export const getFarmItemActivities = async (id) => {
+export const getFarmItemActivities = async (params) => {
+  console.log("param", params);
   try {
     const response = await axiosInstance.get("/farmItemActivities", {
-      params: id,
+      params: { farmItemId: params.farmItemId },
     });
     return response.data;
   } catch (error) {

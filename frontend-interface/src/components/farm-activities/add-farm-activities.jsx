@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Button, Form, Alert } from "react-bootstrap";
-import axios from "axios";
-import DatePicker from "react-datepicker";
+import { Modal, Button, Form } from "react-bootstrap";
 import "react-datepicker/dist/react-datepicker.css";
 import "../add-item-modal/add-item-modal.scss";
 
