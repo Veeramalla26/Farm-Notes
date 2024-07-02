@@ -52,7 +52,7 @@ async function totalCount(data) {
 
     logger.info(`Total count records fetched successfully`);
     return {
-      totalFarmItems: farmItems.rows.length,
+      totalFarmItems: farmItems.rows.length || farmItems.count,
       totalfarmItemActivities:
         farmItemActivities.rows.length || farmItemActivities.count,
       response,
